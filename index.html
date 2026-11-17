@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NYAMPE - Jelajah Kota Medan, Cara Kamu</title>
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700;1,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- =====================================================
+         Top Navigation Bar (Web Style)
+         ===================================================== -->
+    <header class="navbar-header">
+        <div class="container navbar-container">
+            <a href="#" class="logo" aria-label="Beranda NYAMPE">
+                <span class="logo-text">NYAMPE</span>
+                <span class="logo-pin">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#fed232">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                </span>
+            </a>
+
+            <nav class="nav-menu" aria-label="Navigasi Utama">
+                <a href="#beranda" class="nav-link active">Beranda</a>
+                <a href="#cari-rute" class="nav-link">Cari Rute</a>
+                <a href="#lokasi-populer" class="nav-link">Lokasi Populer</a>
+                <a href="#kenapa-nyampe" class="nav-link">Keunggulan</a>
+                <a href="#panduan-medan" class="nav-link">Moda Transportasi</a>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="#cari-rute" class="btn-nav-primary">Rencanakan Rute</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- =====================================================
+             Hero Section (Desktop 2-Column Web Layout)
+             ===================================================== -->
+        <section class="hero-section" id="beranda">
+            <div class="container">
+                <div class="hero-grid">
+                    
+                    <!-- Left Column: Branding, Heading & Value Statement -->
+                    <div class="hero-text-col">
+                        <div class="hero-tagline-badge">
+                            <span class="tagline-dot"></span>
+                            JELAJAH KOTA, CARA KAMU.
+                        </div>
+                        
+                        <h1 class="hero-title">
+                            Kota baru?<br>
+                            Yuk, <span class="highlight-yellow">Cari jalanmu.</span>
+                        </h1>
+                        
+                        <p class="hero-lead">
+                            Panduan navigasi transportasi umum terlengkap di Kota Medan. 
+                            Temukan rute angkot, koridor Trans Metro Deli, hingga kereta api bandara secara mudah, hemat waktu, dan transparan tanpa rasa takut tersesat.
+                        </p>
+
+                        <div class="hero-stats-row">
+                            <div class="stat-badge">
+                                <span class="stat-icon">🚌</span>
+                                <div class="stat-info">
+                                    <strong>Trans Metro Deli</strong>
+                                    <small>5 Koridor BTS</small>
+                                </div>
+                            </div>
+                            <div class="stat-badge">
+                                <span class="stat-icon">🚐</span>
+                                <div class="stat-info">
+                                    <strong>Angkot Medan</strong>
+                                    <small>120+ Nomor Trayek</small>
+                                </div>
+                            </div>
+                            <div class="stat-badge">
+                                <span class="stat-icon">🚆</span>
+                                <div class="stat-info">
+                                    <strong>KAI & Bandara</strong>
+                                    <small>Medan - Kualanamu</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Interactive Route Planner Card -->
+                    <div class="hero-planner-col" id="cari-rute">
+                        <div class="hero-card">
+                            <!-- Watermark N Logo -->
+                            <div class="hero-watermark" aria-hidden="true">
+                                <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M40 170V50C40 38.9543 48.9543 30 60 30C71.0457 30 80 38.9543 80 50V120L135 40C142 30 155 30 162 38C168 45 170 55 170 65V160C170 171.046 161.046 180 150 180C138.954 180 130 171.046 130 160V95L75 173C68 183 55 183 48 175C43 170 40 165 40 170Z" fill="white" fill-opacity="0.14"/>
+                                    <path d="M165 25L185 45M185 25L145 25L185 65" stroke="white" stroke-opacity="0.22" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+
+                            <div class="hero-card-header">
+                                <span class="card-eyebrow">PENCARIAN RUTE CEPAT</span>
+                                <h2 class="card-title">Mau ke mana hari ini?</h2>
+                                <p class="card-subtitle">Pilih lokasi asal dan tujuanmu untuk melihat rekomendasi perjalanan terbaik.</p>
+                            </div>
+
+                            <!-- Route Search Form Box -->
+                            <form class="route-box" action="#cari-rute" method="get">
+                                <!-- Origin Row -->
+                                <div class="route-field">
+                                    <div class="field-icon icon-ring" aria-hidden="true">
+                                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="3">
+                                            <circle cx="12" cy="12" r="8"/>
+                                            <circle cx="12" cy="12" r="3" fill="#282f94"/>
+                                        </svg>
+                                    </div>
+                                    <div class="field-text">
+                                        <label for="originInput">BERANGKAT DARI</label>
+                                        <input type="text" id="originInput" name="origin" value="Pilih lokasi awal" placeholder="Ketik nama jalan, kampus, atau tempat...">
+                                    </div>
+                                </div>
+
+                                <!-- Divider with Swap Button -->
+                                <div class="route-divider">
+                                    <button class="swap-btn" id="swapBtn" title="Tukar lokasi asal dan tujuan" type="button" aria-label="Tukar lokasi">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M7 3v14M3 8l4-5 4 5M17 21V7M13 16l4 5 4-5"/>
+                                        </svg>
+                                    </button>
+                                </div>
+
+                                <!-- Destination Row -->
+                                <div class="route-field">
+                                    <div class="field-icon icon-pin" aria-hidden="true">
+                                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2.5">
+                                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="none"/>
+                                            <circle cx="12" cy="9" r="2.5" fill="#282f94"/>
+                                        </svg>
+                                    </div>
+                                    <div class="field-text">
+                                        <label for="destInput">MAU KE MANA?</label>
+                                        <input type="text" id="destInput" name="destination" value="Pilih tujuanmu" placeholder="Ketik tujuan mall, stasiun, atau wisata...">
+                                    </div>
+                                </div>
+
+                                <!-- Yellow CTA Action Button -->
+                                <button class="btn-cta" id="searchRouteBtn" type="submit">
+                                    <span>Cari cara perjalanan</span>
+                                    <svg class="btn-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                                    </svg>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================================
+             Popular Locations Section (Web Grid)
+             ===================================================== -->
+        <section class="section popular-section" id="lokasi-populer">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <span class="section-badge">JELAJAH DESTINASI</span>
+                        <h2 class="section-title">Lokasi populer di Medan</h2>
+                        <p class="section-subtitle">Tempat favorit yang paling sering dikunjungi mahasiswa, wisatawan, dan warga Medan.</p>
+                    </div>
+                    <a href="#semua-lokasi" class="link-see-all">
+                        <span>Lihat semua</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 18l6-6-6-6"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Locations Grid (Responsive Cards) -->
+                <div class="places-grid">
+                    <!-- Location Card 1: USU -->
+                    <article class="place-card" data-location="USU, Medan">
+                        <div class="place-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400&auto=format&fit=crop&q=80" 
+                                 alt="Universitas Sumatera Utara (USU)" 
+                                 onerror="this.src='https://placehold.co/400x260/1e293b/ffffff?text=USU+Medan'">
+                            <span class="place-tag">Pendidikan</span>
+                        </div>
+                        <div class="place-content">
+                            <div class="place-header">
+                                <h3 class="place-name">USU</h3>
+                                <span class="place-category">Kampus</span>
+                            </div>
+                            <p class="place-desc">Pintu 1 - 4 Padang Bulan, dilalui berbagai rute angkot (KPUM, Morina) dan TMD Koridor 2.</p>
+                            <div class="place-footer">
+                                <span class="place-transit">🚌 Koridor 2 TMD • 🚐 Angkot 61, 103</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Location Card 2: Center Point -->
+                    <article class="place-card" data-location="Center Point Medan">
+                        <div class="place-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1519567241046-7f570eee3ce6?w=400&auto=format&fit=crop&q=80" 
+                                 alt="Mall Center Point Medan" 
+                                 onerror="this.src='https://placehold.co/400x260/1e293b/ffffff?text=Center+Point'">
+                            <span class="place-tag">Lifestyle</span>
+                        </div>
+                        <div class="place-content">
+                            <div class="place-header">
+                                <h3 class="place-name">Center Point</h3>
+                                <span class="place-category">Pusat Belanja</span>
+                            </div>
+                            <p class="place-desc">Mall modern di jantung kota Medan, tepat di sebelah timur Stasiun Besar Kereta Api Medan.</p>
+                            <div class="place-footer">
+                                <span class="place-transit">🚶 3 Menit dari Stasiun Medan</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Location Card 3: Stasiun Medan -->
+                    <article class="place-card" data-location="Stasiun Medan">
+                        <div class="place-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1474487548417-781cb71495f3?w=400&auto=format&fit=crop&q=80" 
+                                 alt="Stasiun Kereta Api Medan" 
+                                 onerror="this.src='https://placehold.co/400x260/1e293b/ffffff?text=Stasiun+Medan'">
+                            <span class="place-tag">Hub Transit</span>
+                        </div>
+                        <div class="place-content">
+                            <div class="place-header">
+                                <h3 class="place-name">Stasiun Medan</h3>
+                                <span class="place-category">Transportasi</span>
+                            </div>
+                            <p class="place-desc">Titik temu KA Bandara Railink, KA Sri Lelawangsa Binjai, dan titik integrasi halte bus kota.</p>
+                            <div class="place-footer">
+                                <span class="place-transit">🚆 Terminal Railink & Halte Lap. Merdeka</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Location Card 4: Istana Maimun -->
+                    <article class="place-card" data-location="Istana Maimun Medan">
+                        <div class="place-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=400&auto=format&fit=crop&q=80" 
+                                 alt="Istana Maimun Medan" 
+                                 onerror="this.src='https://placehold.co/400x260/1e293b/ffffff?text=Istana+Maimun'">
+                            <span class="place-tag">Sejarah</span>
+                        </div>
+                        <div class="place-content">
+                            <div class="place-header">
+                                <h3 class="place-name">Istana Maimun</h3>
+                                <span class="place-category">Wisata Budaya</span>
+                            </div>
+                            <p class="place-desc">Ikon peninggalan Kesultanan Deli di Jalan Brigjend Katamso dengan rute akses angkot langsung.</p>
+                            <div class="place-footer">
+                                <span class="place-transit">🚐 Angkot Trayek Katamso & Masjid Raya</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================================
+             Feature & Promo Section: Kenapa pakai NYAMPE?
+             ===================================================== -->
+        <section class="section feature-section" id="kenapa-nyampe">
+            <div class="container">
+                <div class="feature-frame">
+                    
+                    <!-- Main Benefits Card -->
+                    <div class="benefits-card">
+                        <div class="benefits-heading-wrap">
+                            <h2 class="benefits-title">
+                                <em>Kenapa pakai</em> <strong>NYAMPE?</strong>
+                            </h2>
+                            <p class="benefits-subtitle">
+                                Solusi navigasi cerdas yang dirancang khusus untuk kenyamanan perjalanan sehari-hari di Kota Medan.
+                            </p>
+                        </div>
+
+                        <div class="benefits-grid">
+                            <!-- Feature 1: Budget -->
+                            <div class="benefit-item">
+                                <div class="benefit-icon">
+                                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="2" y="6" width="20" height="12" rx="3"/>
+                                        <circle cx="12" cy="12" r="3"/>
+                                        <circle cx="6" cy="12" r=".5" fill="#282f94"/>
+                                        <circle cx="18" cy="12" r=".5" fill="#282f94"/>
+                                    </svg>
+                                </div>
+                                <h3 class="benefit-heading">Pilih yang sesuai budget</h3>
+                                <p class="benefit-desc">Bandingkan estimasi biaya perjalanan angkot, Trans Metro Deli, dan ojol secara transparan tanpa khawatir ditarif mahal.</p>
+                            </div>
+
+                            <!-- Feature 2: Hemat Waktu -->
+                            <div class="benefit-item">
+                                <div class="benefit-icon">
+                                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="9"/>
+                                        <polyline points="12 7 12 12 15 15"/>
+                                    </svg>
+                                </div>
+                                <h3 class="benefit-heading">Hemat waktu</h3>
+                                <p class="benefit-desc">Lihat estimasi waktu tempuh tercepat, jadwal kedatangan armada, serta opsi dengan jumlah transit seminimal mungkin.</p>
+                            </div>
+
+                            <!-- Feature 3: Instruksi Jelas -->
+                            <div class="benefit-item">
+                                <div class="benefit-icon">
+                                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M12 2v20M4 5h14l3 3.5-3 3.5H4V5zM20 14H6l-3 3.5 3 3.5h14v-7z"/>
+                                    </svg>
+                                </div>
+                                <h3 class="benefit-heading">Instruksi jelas</h3>
+                                <p class="benefit-desc">Titik naik, kode trayek angkot, halte pemberhentian, dan panduan transit yang mudah dipahami bahkan untuk pendatang baru.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Highlight Destination Banner (Velankanni) -->
+                    <div class="highlight-banner" id="semua-lokasi">
+                        <img src="https://images.unsplash.com/photo-1548625361-16eb1006ff29?w=1200&auto=format&fit=crop&q=80" 
+                             alt="Graha Maria Annai Velangkanni Medan" 
+                             onerror="this.src='https://placehold.co/1200x400/282f94/ffffff?text=Graha+Maria+Annai+Velangkanni+Medan'">
+                        <div class="banner-overlay"></div>
+                        <div class="banner-content">
+                            <span class="banner-badge">DESTINASI UNGGULAN KOTA MEDAN</span>
+                            <span class="banner-label">velankanni</span>
+                            <p class="banner-text">Gereja berarsitektur Indo-Mogul yang megah di Tanjung Selamat. Dapatkan rute angkot terdekat langsung ke lokasi.</p>
+                            <a href="#cari-rute" class="banner-btn">Lihat Panduan Rute &rarr;</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================================
+             Medan Public Transit Guide (Web Section)
+             ===================================================== -->
+        <section class="section modes-section" id="panduan-medan">
+            <div class="container">
+                <div class="section-header center-header">
+                    <span class="section-badge">PANDUAN TRANSPORTASI</span>
+                    <h2 class="section-title">Kenali Moda Transportasi Kota Medan</h2>
+                    <p class="section-subtitle">Tiga pilihan utama transportasi umum untuk mobilitas hemat dan nyaman di seluruh penjuru kota.</p>
+                </div>
+
+                <div class="modes-grid">
+                    <!-- Transit Card 1: Trans Metro Deli -->
+                    <div class="mode-card">
+                        <div class="mode-icon-circle">🚌</div>
+                        <h3 class="mode-title">Trans Metro Deli (TMD)</h3>
+                        <p class="mode-desc">
+                            Bus modern ber-AC dengan skema Teman Bus. Melayani koridor utama seperti Terminal Amplas, Pinang Baris, Lapangan Merdeka, Tuntungan, dan Belawan dengan pembayaran non-tunai (Tap Cash/QRIS).
+                        </p>
+                        <ul class="mode-features">
+                            <li>Armada ber-AC & nyaman</li>
+                            <li>Halte resmi terjadwal</li>
+                            <li>Pembayaran cashless (E-Money/QRIS)</li>
+                        </ul>
+                    </div>
+
+                    <!-- Transit Card 2: Angkutan Kota (Angkot) -->
+                    <div class="mode-card">
+                        <div class="mode-icon-circle">🚐</div>
+                        <h3 class="mode-title">Angkutan Kota (Angkot)</h3>
+                        <p class="mode-desc">
+                            Jaringan transportasi terluas yang menembus lorong dan jalan penghubung kota. Dioperasikan oleh KPUM, Morina, Medan Bus, Rahayu, dan lainnya dengan kode nomor trayek di kaca depan.
+                        </p>
+                        <ul class="mode-features">
+                            <li>Menjangkau pelosok & gang kampus</li>
+                            <li>Frekuensi armada tinggi</li>
+                            <li>Tarif terjangkau mulai Rp5.000</li>
+                        </ul>
+                    </div>
+
+                    <!-- Transit Card 3: Kereta Api & Bandara -->
+                    <div class="mode-card">
+                        <div class="mode-icon-circle">🚆</div>
+                        <h3 class="mode-title">KAI & Railink Bandara</h3>
+                        <p class="mode-desc">
+                            Bebas hambatan macet dari pusat kota ke Bandara Internasional Kualanamu (KNO) via Kereta Api Bandara, serta komuter Sri Lelawangsa menghubungkan Medan dengan Kota Binjai.
+                        </p>
+                        <ul class="mode-features">
+                            <li>Kecepatan & waktu tempuh pasti</li>
+                            <li>Terintegrasi di Stasiun Besar Medan</li>
+                            <li>Fasilitas bagasi & tempat duduk nyaman</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =====================================================
+         Web Footer (Full-Featured Desktop Footer)
+         ===================================================== -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <span class="logo-text">NYAMPE</span>
+                        <span class="logo-pin">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#fed232">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                            </svg>
+                        </span>
+                    </div>
+                    <p class="footer-desc">
+                        Platform panduan transportasi publik dan navigasi rute untuk Kota Medan. Jelajah kota dengan percaya diri, hemat biaya, dan tepat waktu.
+                    </p>
+                    <span class="footer-motto">Jelajah Kota, Cara Kamu.</span>
+                </div>
+
+                <div class="footer-nav-col">
+                    <h4 class="footer-heading">Navigasi</h4>
+                    <ul class="footer-links">
+                        <li><a href="#beranda">Beranda</a></li>
+                        <li><a href="#cari-rute">Cari Rute Perjalanan</a></li>
+                        <li><a href="#lokasi-populer">Lokasi Populer</a></li>
+                        <li><a href="#kenapa-nyampe">Keunggulan Layanan</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-nav-col">
+                    <h4 class="footer-heading">Transportasi Medan</h4>
+                    <ul class="footer-links">
+                        <li><a href="#panduan-medan">Trans Metro Deli</a></li>
+                        <li><a href="#panduan-medan">Trayek Angkot Medan</a></li>
+                        <li><a href="#panduan-medan">KAI Bandara Railink</a></li>
+                        <li><a href="#panduan-medan">Titik Transit Lap. Merdeka</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-nav-col">
+                    <h4 class="footer-heading">Praktikum</h4>
+                    <p class="footer-info-text">
+                        Praktikum Pemrograman Web 1 (PW 1)<br>
+                        Implementasi Desain Web Responsif murni menggunakan Semantic HTML5 &amp; Modern CSS (No JS).
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 NYAMPE. Seluruh hak cipta dilindungi.</p>
+                <div class="footer-meta">
+                    <span>Kota Medan, Sumatera Utara</span>
+                    <span>•</span>
+                    <span>Praktikum PW 1</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
