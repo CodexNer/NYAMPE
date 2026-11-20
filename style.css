@@ -167,7 +167,8 @@ input, textarea {
 .floating-navbar {
     background-color: #ffffff;
     border-radius: 50px;
-    padding: 8px 18px 8px 24px;
+    padding: 6px 16px 6px 20px;
+    height: 56px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -188,12 +189,14 @@ input, textarea {
     align-items: center;
     user-select: none;
     text-decoration: none;
+    flex-shrink: 0;
 }
 
 .navbar-logo-img {
-    height: 38px;
+    height: 32px;
+    max-height: 34px;
     width: auto;
-    max-height: 40px;
+    max-width: 110px;
     display: block;
     object-fit: contain;
     transition: transform 0.2s ease;
@@ -209,7 +212,8 @@ input, textarea {
 .navbar-actions {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
+    flex-shrink: 0;
 }
 
 .nav-search-btn {
@@ -223,6 +227,7 @@ input, textarea {
     border-radius: 50%;
     color: var(--text-main);
     transition: background-color 0.2s, color 0.2s;
+    flex-shrink: 0;
 }
 
 .nav-search-btn:hover {
@@ -241,13 +246,17 @@ input, textarea {
 .nav-profile-trigger {
     background: transparent;
     border: none;
+    outline: none;
     cursor: pointer;
     display: inline-flex;
+    flex-direction: row;
     align-items: center;
     gap: 6px;
-    padding: 3px 6px 3px 3px;
+    padding: 2px 4px;
     border-radius: 50px;
     transition: background-color 0.2s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .nav-profile-trigger:hover,
@@ -256,14 +265,15 @@ input, textarea {
 }
 
 .nav-avatar-img {
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid #ffffff;
     box-shadow: 0 2px 8px rgba(24, 25, 56, 0.12);
     transition: transform 0.2s ease;
     display: block;
+    flex-shrink: 0;
 }
 
 .nav-profile-trigger:hover .nav-avatar-img {
@@ -275,45 +285,50 @@ input, textarea {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 28px;
-    height: 28px;
-    border-radius: 8px;
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
     color: var(--primary-blue);
     transition: background-color 0.2s ease, transform 0.2s ease;
+    flex-shrink: 0;
 }
 
 .nav-profile-trigger:hover .dropdown-menu-icon,
 .nav-profile-dropdown.open .dropdown-menu-icon {
-    background-color: var(--bg-tint);
+    background-color: #e4eaf9;
     transform: scale(1.05);
 }
 
-/* Dropdown Menu Box */
+/* Dropdown Menu Box - Hidden by default, only shown when .open */
 .dropdown-menu {
+    display: none;
     position: absolute;
-    top: calc(100% + 12px);
+    top: calc(100% + 10px);
     right: 0;
-    min-width: 200px;
+    width: 190px;
     background-color: #ffffff;
     border-radius: 16px;
     padding: 8px;
-    box-shadow: 0 16px 40px rgba(24, 25, 56, 0.16), 0 2px 8px rgba(24, 25, 56, 0.04);
+    box-shadow: 0 16px 40px rgba(18, 24, 60, 0.18), 0 2px 8px rgba(18, 24, 60, 0.05);
     border: 1px solid var(--border-light);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-8px);
-    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
-    pointer-events: none;
-    z-index: 1000;
+    z-index: 9999;
 }
 
-/* Open State (via JS .open or CSS :focus-within) */
-.nav-profile-dropdown.open .dropdown-menu,
-.nav-profile-dropdown:focus-within .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    pointer-events: auto;
+/* Open State (Only via JS .open - NO :focus-within bug on touch) */
+.nav-profile-dropdown.open .dropdown-menu {
+    display: block;
+    animation: dropdownPop 0.18s ease forwards;
+}
+
+@keyframes dropdownPop {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .dropdown-header {
@@ -482,7 +497,7 @@ input, textarea {
 }
 
 /* =========================================================
-   Floating Search / Route Planner Bar (Stacked Layout)
+   Floating Search / Route Planner Bar (3-Column Layout)
    ========================================================= */
 .hero-search-wrapper {
     position: relative;
@@ -496,115 +511,42 @@ input, textarea {
     background-color: #ffffff;
     border-radius: 24px;
     box-shadow: 0 16px 45px rgba(18, 24, 60, 0.16);
-    padding: 10px 14px 10px 18px;
+    padding: 10px 14px 10px 16px;
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 10px;
     border: 1px solid rgba(255, 255, 255, 0.9);
 }
 
-.search-inputs-group {
+/* LEFT column: 3 icons stacked vertically (origin, swap, destination) */
+.route-icons-col {
     display: flex;
     flex-direction: column;
-    flex: 1;
-    min-width: 0;
-    gap: 0;
-}
-
-/* Individual Search Field */
-.search-field {
-    display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 2px 0;
-}
-
-.field-icon-wrap {
+    justify-content: space-between;
     flex-shrink: 0;
+    width: 36px;
+    gap: 2px;
+    padding: 4px 0;
+}
+
+/* Each icon node (origin / destination) */
+.route-node-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.field-icon-wrap.icon-home {
     width: 34px;
     height: 34px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-shrink: 0;
 }
 
-.field-icon-wrap.icon-pin-circle {
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
+.route-node-icon.icon-destination {
     background-color: #eef2ff;
+    border-radius: 50%;
 }
 
-.field-inputs {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    flex: 1;
-}
-
-.field-label {
-    font-size: 10px;
-    font-weight: 700;
-    color: #8d92a9;
-    letter-spacing: 0.4px;
-    margin-bottom: 0px;
-    line-height: 1.2;
-    user-select: none;
-    text-transform: uppercase;
-}
-
-.field-inputs input {
-    border: none;
-    outline: none;
-    font-size: 14.5px;
-    font-weight: 600;
-    color: var(--text-main);
-    background: transparent;
-    padding: 0;
-    line-height: 1.3;
-    width: 100%;
-    font-family: inherit;
-}
-
-.field-inputs input:focus {
-    color: var(--primary-blue);
-}
-
-.field-inputs input::placeholder {
-    color: #64748b;
-    font-weight: 500;
-}
-
-/* Vertical Swap Divider Row (Minimal gap between origin & destination) */
-.search-divider-row {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    margin: -6px 0;
-    padding: 0 6px;
-    height: 16px;
-}
-
-.divider-line {
-    position: absolute;
-    left: 44px;
-    right: 0;
-    height: 1px;
-    background-color: #f0f3fa;
-    z-index: 1;
-}
-
-/* Vertical Swap Button */
+/* Swap button lives inside the icon column */
 .btn-swap-locations {
-    position: relative;
-    z-index: 2;
     width: 28px;
     height: 28px;
     border-radius: 50%;
@@ -623,7 +565,69 @@ input, textarea {
     transform: rotate(180deg);
 }
 
-/* Yellow CTA Action Search Button - Circular */
+/* CENTER column: stacked text inputs */
+.route-inputs-col {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    gap: 0;
+}
+
+/* Each input row (label + input) */
+.route-input-row {
+    display: flex;
+    flex-direction: column;
+    padding: 4px 0;
+    min-width: 0;
+}
+
+/* Thin divider between the two fields */
+.route-input-divider {
+    height: 1px;
+    background-color: #f0f3fa;
+    margin: 2px 0;
+}
+
+/* Labels inside route rows */
+.field-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: #8d92a9;
+    letter-spacing: 0.4px;
+    line-height: 1.2;
+    user-select: none;
+    text-transform: uppercase;
+    margin-bottom: 1px;
+}
+
+/* Inputs inside route rows */
+.route-input-row input {
+    border: none;
+    outline: none;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--text-main);
+    background: transparent;
+    padding: 0;
+    line-height: 1.3;
+    width: 100%;
+    font-family: inherit;
+    cursor: text;
+    user-select: text;
+    -webkit-user-select: text;
+}
+
+.route-input-row input:focus {
+    color: var(--primary-blue);
+}
+
+.route-input-row input::placeholder {
+    color: #64748b;
+    font-weight: 500;
+}
+
+/* RIGHT: Circular yellow search button */
 .btn-search-action {
     width: 52px;
     height: 52px;
@@ -1194,13 +1198,18 @@ input, textarea {
     .hero-search-card {
         flex-direction: row;
         align-items: center;
-        gap: 12px;
-        padding: 10px 12px 10px 14px;
+        gap: 10px;
+        padding: 10px 10px 10px 12px;
         border-radius: 20px;
     }
 
-    .search-inputs-group {
-        width: 100%;
+    .route-icons-col {
+        width: 32px;
+    }
+
+    .route-node-icon {
+        width: 30px;
+        height: 30px;
     }
 
     .btn-search-action {

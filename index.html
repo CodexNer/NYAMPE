@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700;1,800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2.3">
 </head>
 <body>
 
@@ -20,7 +20,7 @@
             <nav class="floating-navbar" aria-label="Navigasi Utama">
                 <!-- Brand Logo Image -->
                 <a href="#beranda" class="navbar-brand" aria-label="Beranda NYAMPE">
-                    <img src="assets/logo.png" alt="NYAMPE" class="navbar-logo-img">
+                    <img src="assets/logo.png" alt="NYAMPE" class="navbar-logo-img" style="height: 32px; max-height: 34px; width: auto; max-width: 110px; object-fit: contain;">
                 </a>
 
                 <!-- Nav Right Actions: Search Icon & Profile with Dropdown Menu -->
@@ -123,52 +123,56 @@
                             </p>
                         </div>
 
-                        <!-- Floating Search / Route Planning Card (Lokasi Awal di Atas Tujuan) -->
+                        <!-- Floating Search / Route Planning Card (Sejajar 3 Icons Layout) -->
                         <div class="hero-search-wrapper" id="cari-rute">
                             <form class="hero-search-card" action="#lokasi-populer" method="get">
                                 
-                                <div class="search-inputs-group">
-                                    <!-- Field 1: Lokasi Awal (Posisi di atas) -->
-                                    <div class="search-field field-origin">
-                                        <div class="field-icon-wrap icon-home" aria-hidden="true">
-                                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                                <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10.5z"/>
-                                                <circle cx="12" cy="14" r="2" fill="#282f94"/>
-                                            </svg>
-                                        </div>
-                                        <div class="field-inputs">
-                                            <label for="originInput" class="field-label">Lokasi awal</label>
-                                            <input type="text" id="originInput" name="origin" value="Pilih lokasi awal" placeholder="Pilih lokasi awal" autocomplete="off">
-                                        </div>
+                                <!-- Left Column: 3 Perfectly Aligned Icons (Origin, Swap, Destination) -->
+                                <div class="route-icons-col">
+                                    <!-- 1. Logo Lokasi Awal (House) -->
+                                    <div class="route-node-icon icon-origin" aria-hidden="true" title="Lokasi Awal">
+                                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10.5z"/>
+                                            <circle cx="12" cy="14" r="2" fill="#282f94"/>
+                                        </svg>
                                     </div>
 
-                                    <!-- Divider with Vertical Swap Button -->
-                                    <div class="search-divider-row">
-                                        <div class="divider-line" aria-hidden="true"></div>
-                                        <button type="button" class="btn-swap-locations" id="swapBtn" title="Tukar lokasi asal dan tujuan" aria-label="Tukar lokasi asal dan tujuan">
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-                                                <path d="M7 4v16M3 8l4-4 4 4M17 20V4M13 16l4 4 4-4"/>
-                                            </svg>
-                                        </button>
-                                    </div>
+                                    <!-- 2. Logo Garis Dua (Vertical Swap Button) -->
+                                    <button type="button" class="btn-swap-locations" id="swapBtn" title="Tukar lokasi asal dan tujuan" aria-label="Tukar lokasi asal dan tujuan">
+                                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M7 4v16M3 8l4-4 4 4M17 20V4M13 16l4 4 4-4"/>
+                                        </svg>
+                                    </button>
 
-                                    <!-- Field 2: Mau ke mana? / Pilih Tujuan (Posisi di bawah) -->
-                                    <div class="search-field field-destination">
-                                        <div class="field-icon-wrap icon-pin-circle" aria-hidden="true">
-                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#282f94">
-                                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                                            </svg>
-                                        </div>
-                                        <div class="field-inputs">
-                                            <label for="destInput" class="field-label">Mau ke mana?</label>
-                                            <input type="text" id="destInput" name="destination" value="Pilih tujuan" placeholder="Pilih tujuan" autocomplete="off">
-                                        </div>
+                                    <!-- 3. Logo Lokasi Tujuan (Pin) -->
+                                    <div class="route-node-icon icon-destination" aria-hidden="true" title="Lokasi Tujuan">
+                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="#282f94">
+                                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                                        </svg>
                                     </div>
                                 </div>
 
-                                <!-- Yellow CTA Search Action Button -->
+                                <!-- Center Column: Text Inputs Stack -->
+                                <div class="route-inputs-col">
+                                    <!-- Field 1: Lokasi Awal -->
+                                    <div class="route-input-row">
+                                        <label for="originInput" class="field-label">Lokasi awal</label>
+                                        <input type="text" id="originInput" name="origin" value="Pilih lokasi awal" placeholder="Pilih lokasi awal" autocomplete="off">
+                                    </div>
+
+                                    <!-- Subtle Divider Line -->
+                                    <div class="route-input-divider" aria-hidden="true"></div>
+
+                                    <!-- Field 2: Mau ke mana? -->
+                                    <div class="route-input-row">
+                                        <label for="destInput" class="field-label">Mau ke mana?</label>
+                                        <input type="text" id="destInput" name="destination" value="Pilih tujuan" placeholder="Pilih tujuan" autocomplete="off">
+                                    </div>
+                                </div>
+
+                                <!-- Right Column: Circular Yellow Search Button -->
                                 <button type="submit" class="btn-search-action" id="searchRouteBtn" aria-label="Cari Rute">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#181938" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#181938" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
                                         <circle cx="11" cy="11" r="7"/>
                                         <line x1="21" y1="21" x2="16.65" y2="16.65"/>
                                     </svg>
