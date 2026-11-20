@@ -18,24 +18,12 @@
     <header class="navbar-wrapper">
         <div class="container">
             <nav class="floating-navbar" aria-label="Navigasi Utama">
-                <!-- Brand Logo (Matches design with yellow accent triangle) -->
+                <!-- Brand Logo Image -->
                 <a href="#beranda" class="navbar-brand" aria-label="Beranda NYAMPE">
-                    <span class="brand-text">NYAMPE</span>
-                    <span class="brand-triangle" aria-hidden="true">
-                        <svg width="12" height="10" viewBox="0 0 12 10" fill="#fed232">
-                            <polygon points="0,0 12,0 6,10"/>
-                        </svg>
-                    </span>
+                    <img src="assets/logo.png" alt="NYAMPE" class="navbar-logo-img">
                 </a>
 
-                <!-- Nav Menu Links -->
-                <div class="navbar-menu">
-                    <a href="#beranda" class="nav-item active">Jelajah</a>
-                    <a href="#lokasi-populer" class="nav-item">Destinasi</a>
-                    <a href="#panduan-medan" class="nav-item">Komunitas</a>
-                </div>
-
-                <!-- Nav Right Actions: Search Icon & Profile Avatar -->
+                <!-- Nav Right Actions: Search Icon & Profile with Dropdown Menu -->
                 <div class="navbar-actions">
                     <button type="button" class="nav-search-btn" aria-label="Pencarian" title="Pencarian">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#181938" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -44,12 +32,41 @@
                         </svg>
                     </button>
                     
-                    <a href="#beranda" class="nav-profile-link" aria-label="Profil Pengguna">
-                        <img src="assets/avatar.jpg" 
-                             alt="Foto Profil Pengguna" 
-                             class="nav-avatar-img"
-                             onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80'">
-                    </a>
+                    <!-- Profile & Dropdown (Jelajah, Destinasi, Komunitas) -->
+                    <div class="nav-profile-dropdown" id="navProfileDropdown">
+                        <button type="button" class="nav-profile-trigger" id="dropdownToggleBtn" aria-expanded="false" aria-haspopup="true" aria-label="Buka Menu Navigasi & Profil">
+                            <img src="assets/avatar.jpg" 
+                                 alt="Foto Profil Pengguna" 
+                                 class="nav-avatar-img"
+                                 onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80'">
+                            <span class="dropdown-menu-icon" aria-hidden="true" title="Menu Navigasi">
+                                <svg class="hamburger-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="4" y1="6" x2="20" y2="6"></line>
+                                    <line x1="4" y1="12" x2="20" y2="12"></line>
+                                    <line x1="4" y1="18" x2="20" y2="18"></line>
+                                </svg>
+                            </span>
+                        </button>
+
+                        <!-- Dropdown Options Menu -->
+                        <div class="dropdown-menu" id="navDropdownMenu" role="menu">
+                            <div class="dropdown-header">
+                                <span class="dropdown-header-title">Menu Utama</span>
+                            </div>
+                            <a href="#beranda" class="dropdown-item" role="menuitem">
+                                <span class="dropdown-item-icon">🧭</span>
+                                <span class="dropdown-item-text">Jelajah</span>
+                            </a>
+                            <a href="#lokasi-populer" class="dropdown-item" role="menuitem">
+                                <span class="dropdown-item-icon">📍</span>
+                                <span class="dropdown-item-text">Destinasi</span>
+                            </a>
+                            <a href="#panduan-medan" class="dropdown-item" role="menuitem">
+                                <span class="dropdown-item-icon">👥</span>
+                                <span class="dropdown-item-text">Komunitas</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </nav>
         </div>
@@ -106,41 +123,46 @@
                             </p>
                         </div>
 
-                        <!-- Floating Search / Route Planning Bar at Bottom -->
+                        <!-- Floating Search / Route Planning Card (Lokasi Awal di Atas Tujuan) -->
                         <div class="hero-search-wrapper" id="cari-rute">
                             <form class="hero-search-card" action="#lokasi-populer" method="get">
                                 
-                                <!-- Field 1: Lokasi Awal -->
-                                <div class="search-field field-origin">
-                                    <div class="field-icon-wrap icon-home" aria-hidden="true">
-                                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10.5z"/>
-                                            <circle cx="12" cy="14" r="2" fill="#282f94"/>
-                                        </svg>
+                                <div class="search-inputs-group">
+                                    <!-- Field 1: Lokasi Awal (Posisi di atas) -->
+                                    <div class="search-field field-origin">
+                                        <div class="field-icon-wrap icon-home" aria-hidden="true">
+                                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10.5z"/>
+                                                <circle cx="12" cy="14" r="2" fill="#282f94"/>
+                                            </svg>
+                                        </div>
+                                        <div class="field-inputs">
+                                            <label for="originInput" class="field-label">Lokasi awal</label>
+                                            <input type="text" id="originInput" name="origin" value="Pilih lokasi awal" placeholder="Pilih lokasi awal" autocomplete="off">
+                                        </div>
                                     </div>
-                                    <div class="field-inputs">
-                                        <label for="originInput" class="field-label">Lokasi awal</label>
-                                        <input type="text" id="originInput" name="origin" value="Pilih lokasi awal" placeholder="Pilih lokasi awal" autocomplete="off">
-                                    </div>
-                                </div>
 
-                                <!-- Swap Button -->
-                                <button type="button" class="btn-swap-locations" id="swapBtn" title="Tukar lokasi asal dan tujuan" aria-label="Tukar lokasi asal dan tujuan">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M7 8h13M16 4l4 4-4 4M17 16H4M8 12l-4 4 4 4"/>
-                                    </svg>
-                                </button>
-
-                                <!-- Field 2: Mau ke mana? -->
-                                <div class="search-field field-destination">
-                                    <div class="field-icon-wrap icon-pin-circle" aria-hidden="true">
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="#282f94">
-                                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                                        </svg>
+                                    <!-- Divider with Vertical Swap Button -->
+                                    <div class="search-divider-row">
+                                        <div class="divider-line" aria-hidden="true"></div>
+                                        <button type="button" class="btn-swap-locations" id="swapBtn" title="Tukar lokasi asal dan tujuan" aria-label="Tukar lokasi asal dan tujuan">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M7 4v16M3 8l4-4 4 4M17 20V4M13 16l4 4 4-4"/>
+                                            </svg>
+                                        </button>
                                     </div>
-                                    <div class="field-inputs">
-                                        <label for="destInput" class="field-label">Mau ke mana?</label>
-                                        <input type="text" id="destInput" name="destination" value="Pilih tujuan" placeholder="Pilih tujuan" autocomplete="off">
+
+                                    <!-- Field 2: Mau ke mana? / Pilih Tujuan (Posisi di bawah) -->
+                                    <div class="search-field field-destination">
+                                        <div class="field-icon-wrap icon-pin-circle" aria-hidden="true">
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#282f94">
+                                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                                            </svg>
+                                        </div>
+                                        <div class="field-inputs">
+                                            <label for="destInput" class="field-label">Mau ke mana?</label>
+                                            <input type="text" id="destInput" name="destination" value="Pilih tujuan" placeholder="Pilih tujuan" autocomplete="off">
+                                        </div>
                                     </div>
                                 </div>
 
@@ -486,9 +508,10 @@
         </div>
     </footer>
 
-    <!-- Optional Interactive Enhancements (Swap Location & Input Focus) -->
+    <!-- Optional Interactive Enhancements (Swap Location, Input Focus, & Profile Dropdown) -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Swap Route Locations
             const swapBtn = document.getElementById('swapBtn');
             const originInput = document.getElementById('originInput');
             const destInput = document.getElementById('destInput');
@@ -502,6 +525,7 @@
                 });
             }
 
+            // Focus auto-select for inputs
             [originInput, destInput].forEach(function(input) {
                 if (!input) return;
                 input.addEventListener('focus', function() {
@@ -510,6 +534,42 @@
                     }
                 });
             });
+
+            // Profile Dropdown Toggle
+            const dropdownContainer = document.getElementById('navProfileDropdown');
+            const dropdownBtn = document.getElementById('dropdownToggleBtn');
+
+            if (dropdownContainer && dropdownBtn) {
+                dropdownBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const isOpen = dropdownContainer.classList.toggle('open');
+                    dropdownBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                });
+
+                // Close when any item inside is clicked
+                dropdownContainer.querySelectorAll('.dropdown-item').forEach(function(item) {
+                    item.addEventListener('click', function() {
+                        dropdownContainer.classList.remove('open');
+                        dropdownBtn.setAttribute('aria-expanded', 'false');
+                    });
+                });
+
+                // Close when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!dropdownContainer.contains(e.target)) {
+                        dropdownContainer.classList.remove('open');
+                        dropdownBtn.setAttribute('aria-expanded', 'false');
+                    }
+                });
+
+                // Close on Escape key
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape') {
+                        dropdownContainer.classList.remove('open');
+                        dropdownBtn.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
         });
     </script>
 </body>
