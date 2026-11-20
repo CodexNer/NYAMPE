@@ -13,151 +13,176 @@
 <body>
 
     <!-- =====================================================
-         Top Navigation Bar (Web Style)
+         Website Navbar (Floating Pill Design)
          ===================================================== -->
-    <header class="navbar-header">
-        <div class="container navbar-container">
-            <a href="#" class="logo" aria-label="Beranda NYAMPE">
-                <span class="logo-text">NYAMPE</span>
-                <span class="logo-pin">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#fed232">
-                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                    </svg>
-                </span>
-            </a>
+    <header class="navbar-wrapper">
+        <div class="container">
+            <nav class="floating-navbar" aria-label="Navigasi Utama">
+                <!-- Brand Logo (Matches design with yellow accent triangle) -->
+                <a href="#beranda" class="navbar-brand" aria-label="Beranda NYAMPE">
+                    <span class="brand-text">NYAMPE</span>
+                    <span class="brand-triangle" aria-hidden="true">
+                        <svg width="12" height="10" viewBox="0 0 12 10" fill="#fed232">
+                            <polygon points="0,0 12,0 6,10"/>
+                        </svg>
+                    </span>
+                </a>
 
-            <nav class="nav-menu" aria-label="Navigasi Utama">
-                <a href="#beranda" class="nav-link active">Beranda</a>
-                <a href="#cari-rute" class="nav-link">Cari Rute</a>
-                <a href="#lokasi-populer" class="nav-link">Lokasi Populer</a>
-                <a href="#kenapa-nyampe" class="nav-link">Keunggulan</a>
-                <a href="#panduan-medan" class="nav-link">Moda Transportasi</a>
+                <!-- Nav Menu Links -->
+                <div class="navbar-menu">
+                    <a href="#beranda" class="nav-item active">Jelajah</a>
+                    <a href="#lokasi-populer" class="nav-item">Destinasi</a>
+                    <a href="#panduan-medan" class="nav-item">Komunitas</a>
+                </div>
+
+                <!-- Nav Right Actions: Search Icon & Profile Avatar -->
+                <div class="navbar-actions">
+                    <button type="button" class="nav-search-btn" aria-label="Pencarian" title="Pencarian">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#181938" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="7"/>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        </svg>
+                    </button>
+                    
+                    <a href="#beranda" class="nav-profile-link" aria-label="Profil Pengguna">
+                        <img src="assets/avatar.jpg" 
+                             alt="Foto Profil Pengguna" 
+                             class="nav-avatar-img"
+                             onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80'">
+                    </a>
+                </div>
             </nav>
-
-            <div class="nav-actions">
-                <a href="#cari-rute" class="btn-nav-primary">Rencanakan Rute</a>
-            </div>
         </div>
     </header>
 
     <main>
         <!-- =====================================================
-             Hero Section (Desktop 2-Column Web Layout)
+             Hero Section (Traveler Background & Floating Search Card)
              ===================================================== -->
         <section class="hero-section" id="beranda">
-            <div class="container">
-                <div class="hero-grid">
+            <div class="container hero-container">
+                <div class="hero-banner-card">
                     
-                    <!-- Left Column: Branding, Heading & Value Statement -->
-                    <div class="hero-text-col">
-                        <div class="hero-tagline-badge">
-                            <span class="tagline-dot"></span>
-                            JELAJAH KOTA, CARA KAMU.
-                        </div>
-                        
-                        <h1 class="hero-title">
-                            Kota baru?<br>
-                            Yuk, <span class="highlight-yellow">Cari jalanmu.</span>
-                        </h1>
-                        
-                        <p class="hero-lead">
-                            Panduan navigasi transportasi umum terlengkap di Kota Medan. 
-                            Temukan rute angkot, koridor Trans Metro Deli, hingga kereta api bandara secara mudah, hemat waktu, dan transparan tanpa rasa takut tersesat.
-                        </p>
-
-                        <div class="hero-stats-row">
-                            <div class="stat-badge">
-                                <span class="stat-icon">🚌</span>
-                                <div class="stat-info">
-                                    <strong>Trans Metro Deli</strong>
-                                    <small>5 Koridor BTS</small>
-                                </div>
-                            </div>
-                            <div class="stat-badge">
-                                <span class="stat-icon">🚐</span>
-                                <div class="stat-info">
-                                    <strong>Angkot Medan</strong>
-                                    <small>120+ Nomor Trayek</small>
-                                </div>
-                            </div>
-                            <div class="stat-badge">
-                                <span class="stat-icon">🚆</span>
-                                <div class="stat-info">
-                                    <strong>KAI & Bandara</strong>
-                                    <small>Medan - Kualanamu</small>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- Background Image & Contrast Overlay -->
+                    <div class="hero-media">
+                        <img src="assets/hero-banner.jpg" 
+                             alt="Jelajah Kota Medan Bersama NYAMPE" 
+                             class="hero-bg-img"
+                             onerror="this.src='https://images.unsplash.com/photo-1527631746610-bca00a040d60?w=1600&auto=format&fit=crop&q=80'">
+                        <div class="hero-overlay"></div>
                     </div>
 
-                    <!-- Right Column: Interactive Route Planner Card -->
-                    <div class="hero-planner-col" id="cari-rute">
-                        <div class="hero-card">
-                            <!-- Watermark N Logo -->
-                            <div class="hero-watermark" aria-hidden="true">
-                                <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M40 170V50C40 38.9543 48.9543 30 60 30C71.0457 30 80 38.9543 80 50V120L135 40C142 30 155 30 162 38C168 45 170 55 170 65V160C170 171.046 161.046 180 150 180C138.954 180 130 171.046 130 160V95L75 173C68 183 55 183 48 175C43 170 40 165 40 170Z" fill="white" fill-opacity="0.14"/>
-                                    <path d="M165 25L185 45M185 25L145 25L185 65" stroke="white" stroke-opacity="0.22" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
+                    <!-- Diagonal Geometric Graphic Badges on Right -->
+                    <div class="hero-decor-graphic" aria-hidden="true">
+                        <svg class="decor-svg" viewBox="0 0 340 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Soft white/blue diagonal stripe -->
+                            <polygon points="100,340 180,340 340,180 340,100" fill="#f1f5f9" fill-opacity="0.92"/>
+                            <!-- Bold signature royal blue diagonal stripe -->
+                            <polygon points="150,340 230,340 340,230 340,150" fill="#282f94"/>
+                            <!-- Yellow ring badge with dark blue center -->
+                            <circle cx="280" cy="195" r="22" fill="#fed232"/>
+                            <circle cx="280" cy="195" r="10" fill="#282f94"/>
+                        </svg>
+                    </div>
+
+                    <!-- Hero Main Content -->
+                    <div class="hero-inner-content">
+                        
+                        <!-- Left Text Content -->
+                        <div class="hero-caption">
+                            <!-- Yellow Accent Dashes -->
+                            <div class="hero-accent-dashes" aria-hidden="true">
+                                <span></span>
+                                <span></span>
                             </div>
 
-                            <div class="hero-card-header">
-                                <span class="card-eyebrow">PENCARIAN RUTE CEPAT</span>
-                                <h2 class="card-title">Mau ke mana hari ini?</h2>
-                                <p class="card-subtitle">Pilih lokasi asal dan tujuanmu untuk melihat rekomendasi perjalanan terbaik.</p>
-                            </div>
+                            <h1 class="hero-title">
+                                Jelajah Kota,<br>
+                                Cara Kamu.
+                            </h1>
 
-                            <!-- Route Search Form Box -->
-                            <form class="route-box" action="#cari-rute" method="get">
-                                <!-- Origin Row -->
-                                <div class="route-field">
-                                    <div class="field-icon icon-ring" aria-hidden="true">
-                                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="3">
-                                            <circle cx="12" cy="12" r="8"/>
-                                            <circle cx="12" cy="12" r="3" fill="#282f94"/>
+                            <p class="hero-lead">
+                                Temukan rute terbaik, langkah demi langkah, dengan panduan yang jelas.
+                            </p>
+                        </div>
+
+                        <!-- Floating Search / Route Planning Bar at Bottom -->
+                        <div class="hero-search-wrapper" id="cari-rute">
+                            <form class="hero-search-card" action="#lokasi-populer" method="get">
+                                
+                                <!-- Field 1: Lokasi Awal -->
+                                <div class="search-field field-origin">
+                                    <div class="field-icon-wrap icon-home" aria-hidden="true">
+                                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10.5z"/>
+                                            <circle cx="12" cy="14" r="2" fill="#282f94"/>
                                         </svg>
                                     </div>
-                                    <div class="field-text">
-                                        <label for="originInput">BERANGKAT DARI</label>
-                                        <input type="text" id="originInput" name="origin" value="Pilih lokasi awal" placeholder="Ketik nama jalan, kampus, atau tempat...">
+                                    <div class="field-inputs">
+                                        <label for="originInput" class="field-label">Lokasi awal</label>
+                                        <input type="text" id="originInput" name="origin" value="Pilih lokasi awal" placeholder="Pilih lokasi awal" autocomplete="off">
                                     </div>
                                 </div>
 
-                                <!-- Divider with Swap Button -->
-                                <div class="route-divider">
-                                    <button class="swap-btn" id="swapBtn" title="Tukar lokasi asal dan tujuan" type="button" aria-label="Tukar lokasi">
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M7 3v14M3 8l4-5 4 5M17 21V7M13 16l4 5 4-5"/>
-                                        </svg>
-                                    </button>
-                                </div>
-
-                                <!-- Destination Row -->
-                                <div class="route-field">
-                                    <div class="field-icon icon-pin" aria-hidden="true">
-                                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2.5">
-                                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="none"/>
-                                            <circle cx="12" cy="9" r="2.5" fill="#282f94"/>
-                                        </svg>
-                                    </div>
-                                    <div class="field-text">
-                                        <label for="destInput">MAU KE MANA?</label>
-                                        <input type="text" id="destInput" name="destination" value="Pilih tujuanmu" placeholder="Ketik tujuan mall, stasiun, atau wisata...">
-                                    </div>
-                                </div>
-
-                                <!-- Yellow CTA Action Button -->
-                                <button class="btn-cta" id="searchRouteBtn" type="submit">
-                                    <span>Cari cara perjalanan</span>
-                                    <svg class="btn-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                                <!-- Swap Button -->
+                                <button type="button" class="btn-swap-locations" id="swapBtn" title="Tukar lokasi asal dan tujuan" aria-label="Tukar lokasi asal dan tujuan">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M7 8h13M16 4l4 4-4 4M17 16H4M8 12l-4 4 4 4"/>
                                     </svg>
                                 </button>
+
+                                <!-- Field 2: Mau ke mana? -->
+                                <div class="search-field field-destination">
+                                    <div class="field-icon-wrap icon-pin-circle" aria-hidden="true">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="#282f94">
+                                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="field-inputs">
+                                        <label for="destInput" class="field-label">Mau ke mana?</label>
+                                        <input type="text" id="destInput" name="destination" value="Pilih tujuan" placeholder="Pilih tujuan" autocomplete="off">
+                                    </div>
+                                </div>
+
+                                <!-- Yellow CTA Search Action Button -->
+                                <button type="submit" class="btn-search-action" id="searchRouteBtn" aria-label="Cari Rute">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#181938" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="11" cy="11" r="7"/>
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                                    </svg>
+                                </button>
+
                             </form>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
+
+                <!-- Quick Transit Highlights (Trans Metro Deli, Angkot, Kereta Api Bandara) -->
+                <div class="hero-stats-row">
+                    <div class="stat-badge">
+                        <span class="stat-icon">🚌</span>
+                        <div class="stat-info">
+                            <strong>Trans Metro Deli</strong>
+                            <small>5 Koridor BTS Teman Bus</small>
+                        </div>
+                    </div>
+                    <div class="stat-badge">
+                        <span class="stat-icon">🚐</span>
+                        <div class="stat-info">
+                            <strong>Angkot Medan</strong>
+                            <small>120+ Nomor Trayek Terdata</small>
+                        </div>
+                    </div>
+                    <div class="stat-badge">
+                        <span class="stat-icon">🚆</span>
+                        <div class="stat-info">
+                            <strong>KAI Bandara & Komuter</strong>
+                            <small>Medan - Kualanamu & Binjai</small>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -461,5 +486,31 @@
         </div>
     </footer>
 
+    <!-- Optional Interactive Enhancements (Swap Location & Input Focus) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const swapBtn = document.getElementById('swapBtn');
+            const originInput = document.getElementById('originInput');
+            const destInput = document.getElementById('destInput');
+
+            if (swapBtn && originInput && destInput) {
+                swapBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const temp = originInput.value;
+                    originInput.value = destInput.value;
+                    destInput.value = temp;
+                });
+            }
+
+            [originInput, destInput].forEach(function(input) {
+                if (!input) return;
+                input.addEventListener('focus', function() {
+                    if (this.value === 'Pilih lokasi awal' || this.value === 'Pilih tujuan') {
+                        this.select();
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

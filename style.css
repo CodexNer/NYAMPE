@@ -128,359 +128,438 @@ button, input {
 }
 
 /* =========================================================
-   Top Navigation Bar (Web Style)
+   Floating Navigation Bar (Web Pill Style)
    ========================================================= */
-.navbar-header {
-    background-color: #ffffff;
-    border-bottom: 1px solid var(--border-light);
+.navbar-wrapper {
     position: sticky;
-    top: 0;
+    top: 14px;
     z-index: 1000;
-    box-shadow: 0 2px 10px rgba(24, 25, 56, 0.03);
+    width: 100%;
+    padding: 14px 0 8px;
+    pointer-events: none;
 }
 
-.navbar-container {
+.floating-navbar {
+    background-color: #ffffff;
+    border-radius: 50px;
+    padding: 8px 18px 8px 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 74px;
+    box-shadow: 0 10px 30px rgba(18, 24, 60, 0.08);
+    border: 1px solid rgba(230, 235, 245, 0.9);
+    backdrop-filter: blur(8px);
+    transition: box-shadow 0.25s ease;
+    pointer-events: auto;
 }
 
-/* Brand Logo */
-.logo {
+.floating-navbar:hover {
+    box-shadow: 0 14px 36px rgba(18, 24, 60, 0.12);
+}
+
+/* Brand Logo (NYAMPE with Yellow Triangle Marker) */
+.navbar-brand {
     display: inline-flex;
-    align-items: center;
+    align-items: baseline;
     gap: 3px;
     user-select: none;
+    text-decoration: none;
 }
 
-.logo-text {
-    font-size: 28px;
+.brand-text {
+    font-size: 26px;
     font-weight: 800;
     font-style: italic;
     color: var(--primary-blue);
     letter-spacing: -0.6px;
+    line-height: 1;
 }
 
-.logo-pin {
+.brand-triangle {
     display: inline-flex;
-    transform: translateY(-5px);
+    transform: translateY(1px);
 }
 
-/* Navigation Links */
-.nav-menu {
+/* Navigation Menu Links */
+.navbar-menu {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 28px;
 }
 
-.nav-link {
+.nav-item {
     font-size: 14.5px;
     font-weight: 600;
     color: var(--text-sub);
-    padding: 8px 16px;
-    border-radius: 8px;
+    text-decoration: none;
+    padding: 6px 4px;
+    position: relative;
+    transition: color 0.2s ease;
 }
 
-.nav-link:hover {
+.nav-item:hover {
     color: var(--primary-blue);
-    background-color: var(--bg-tint);
 }
 
-.nav-link.active {
+.nav-item.active {
     color: var(--primary-blue);
     font-weight: 700;
 }
 
-/* Nav Actions */
-.btn-nav-primary {
+.nav-item.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 4px;
+    right: 4px;
+    height: 2px;
     background-color: var(--primary-blue);
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: 700;
-    padding: 10px 20px;
-    border-radius: 10px;
-    display: inline-block;
+    border-radius: 2px;
 }
 
-.btn-nav-primary:hover {
-    background-color: var(--primary-blue-dark);
+/* Nav Right Actions: Search Icon & Profile Avatar */
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.nav-search-btn {
+    background: transparent;
+    border: none;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 50%;
+    color: var(--text-main);
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.nav-search-btn:hover {
+    background-color: var(--bg-tint);
+    color: var(--primary-blue);
+}
+
+.nav-profile-link {
+    display: flex;
+    align-items: center;
+    border-radius: 50%;
+    text-decoration: none;
+}
+
+.nav-avatar-img {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 8px rgba(24, 25, 56, 0.12);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nav-profile-link:hover .nav-avatar-img {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(24, 25, 56, 0.18);
 }
 
 /* =========================================================
-   Hero Section (Desktop 2-Column Grid)
+   Hero Section (Traveler Background & Floating Search Card)
    ========================================================= */
 .hero-section {
-    padding: 56px 0 40px;
-    background: linear-gradient(180deg, #ffffff 0%, var(--bg-page) 100%);
-    border-bottom: 1px solid var(--border-light);
+    padding: 8px 0 36px;
+    background-color: var(--bg-page);
 }
 
-.hero-grid {
-    display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    gap: 48px;
-    align-items: center;
+.hero-container {
+    width: 100%;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 24px;
 }
 
-/* Left Column */
-.hero-text-col {
-    padding-right: 12px;
+/* Rounded Card Banner */
+.hero-banner-card {
+    position: relative;
+    border-radius: 32px;
+    overflow: hidden;
+    min-height: 520px;
+    box-shadow: 0 16px 40px rgba(24, 25, 56, 0.09);
+    background-color: #1e2478;
 }
 
-.hero-tagline-badge {
-    display: inline-flex;
+/* Background Media & Contrast Overlay */
+.hero-media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.hero-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 25%;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    /* Gradient: darker on left for crisp text contrast, softer on right for photo */
+    background: linear-gradient(90deg, 
+        rgba(15, 23, 42, 0.72) 0%, 
+        rgba(15, 23, 42, 0.48) 45%, 
+        rgba(15, 23, 42, 0.1) 85%);
+}
+
+/* Diagonal Geometric Graphic Badges on Lower Right */
+.hero-decor-graphic {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 320px;
+    height: 320px;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.decor-svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* Inner Content Grid/Flex inside Hero */
+.hero-inner-content {
+    position: relative;
+    z-index: 5;
+    min-height: 520px;
+    padding: 44px 44px 36px 44px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Hero Caption (Left) */
+.hero-caption {
+    max-width: 580px;
+    padding-top: 10px;
+}
+
+/* Yellow Accent Dashes */
+.hero-accent-dashes {
+    display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 11.5px;
-    font-weight: 800;
-    color: var(--primary-blue);
-    background-color: var(--bg-tint);
-    border: 1px solid #dbe2f8;
-    padding: 6px 14px;
-    border-radius: 20px;
-    letter-spacing: 0.8px;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
 }
 
-.tagline-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background-color: var(--primary-blue);
+.hero-accent-dashes span {
+    display: block;
+    width: 24px;
+    height: 5px;
+    background-color: var(--accent-yellow);
+    border-radius: 3px;
 }
 
+/* Main Hero Typography */
 .hero-title {
-    font-size: 46px;
+    font-size: clamp(34px, 4.6vw, 54px);
     font-weight: 800;
     line-height: 1.15;
-    color: var(--text-main);
+    color: #ffffff;
     letter-spacing: -0.8px;
-    margin-bottom: 18px;
-}
-
-.highlight-yellow {
-    color: var(--primary-blue);
-    position: relative;
-    display: inline-block;
+    margin-bottom: 16px;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.4);
 }
 
 .hero-lead {
-    font-size: 16.5px;
+    font-size: clamp(15px, 1.8vw, 17px);
     line-height: 1.6;
-    color: var(--text-sub);
-    margin-bottom: 32px;
-    max-width: 520px;
+    color: rgba(255, 255, 255, 0.92);
+    max-width: 480px;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
 }
 
-/* Hero Quick Stats Badges */
+/* =========================================================
+   Floating Search / Route Planner Bar (White Pill Card)
+   ========================================================= */
+.hero-search-wrapper {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 920px;
+    margin-top: 48px;
+}
+
+.hero-search-card {
+    background-color: #ffffff;
+    border-radius: 26px;
+    box-shadow: 0 16px 45px rgba(18, 24, 60, 0.16);
+    padding: 10px 14px 10px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+}
+
+/* Search Field Inputs */
+.search-field {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: 1;
+    min-width: 0;
+}
+
+.field-icon-wrap {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.field-icon-wrap.icon-pin-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: #eef2ff;
+}
+
+.field-inputs {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    flex: 1;
+}
+
+.field-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #8d92a9;
+    letter-spacing: 0.3px;
+    margin-bottom: 2px;
+    user-select: none;
+}
+
+.field-inputs input {
+    border: none;
+    outline: none;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-main);
+    background: transparent;
+    padding: 2px 0;
+    width: 100%;
+    font-family: inherit;
+}
+
+.field-inputs input:focus {
+    color: var(--primary-blue);
+}
+
+.field-inputs input::placeholder {
+    color: #64748b;
+    font-weight: 500;
+}
+
+/* Swap Locations Button */
+.btn-swap-locations {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: #eef2ff;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.25s ease;
+    flex-shrink: 0;
+}
+
+.btn-swap-locations:hover {
+    background-color: #dbe4ff;
+    transform: rotate(180deg);
+}
+
+/* Yellow CTA Action Search Button */
+.btn-search-action {
+    width: 68px;
+    height: 58px;
+    border-radius: 18px;
+    background-color: var(--accent-yellow);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+    flex-shrink: 0;
+    box-shadow: 0 4px 14px rgba(254, 210, 50, 0.4);
+}
+
+.btn-search-action:hover {
+    background-color: var(--accent-yellow-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(254, 210, 50, 0.5);
+}
+
+.btn-search-action:active {
+    transform: translateY(0);
+}
+
+/* =========================================================
+   Quick Transit Stats Badges (Below Hero)
+   ========================================================= */
 .hero-stats-row {
     display: flex;
-    gap: 14px;
+    gap: 16px;
+    margin-top: 24px;
     flex-wrap: wrap;
+    justify-content: flex-start;
 }
 
 .stat-badge {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     background: #ffffff;
     border: 1px solid var(--border-light);
     border-radius: var(--radius-md);
-    padding: 10px 14px;
+    padding: 12px 16px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    flex: 1;
+    min-width: 200px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(40, 47, 148, 0.06);
 }
 
 .stat-icon {
-    font-size: 22px;
+    font-size: 24px;
     line-height: 1;
 }
 
 .stat-info strong {
     display: block;
-    font-size: 13px;
+    font-size: 13.5px;
     font-weight: 700;
     color: var(--text-main);
 }
 
 .stat-info small {
     display: block;
-    font-size: 11px;
+    font-size: 11.5px;
     color: var(--text-muted);
-}
-
-/* Right Column: Hero Planner Card */
-.hero-card {
-    background: var(--primary-gradient);
-    border-radius: var(--radius-xl);
-    padding: 32px 28px;
-    position: relative;
-    overflow: hidden;
-    color: #ffffff;
-    box-shadow: var(--shadow-elevated);
-}
-
-/* Stylized "N" Watermark */
-.hero-watermark {
-    position: absolute;
-    top: -15px;
-    right: -25px;
-    width: 220px;
-    height: 220px;
-    pointer-events: none;
-}
-
-.hero-watermark svg {
-    width: 100%;
-    height: 100%;
-}
-
-.hero-card-header {
-    position: relative;
-    z-index: 1;
-    margin-bottom: 20px;
-}
-
-.card-eyebrow {
-    font-size: 10.5px;
-    font-weight: 800;
-    color: var(--accent-yellow);
-    letter-spacing: 1px;
-    display: block;
-    margin-bottom: 4px;
-}
-
-.card-title {
-    font-size: 24px;
-    font-weight: 800;
-    line-height: 1.2;
-    letter-spacing: -0.3px;
-    margin-bottom: 6px;
-}
-
-.card-subtitle {
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.82);
-    line-height: 1.4;
-}
-
-/* Route Search Form Card (White Box) */
-.route-box {
-    position: relative;
-    z-index: 1;
-    background: #ffffff;
-    border-radius: var(--radius-lg);
-    padding: 16px 18px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-}
-
-.route-field {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 6px 0;
-}
-
-.field-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: 34px;
-    height: 34px;
-    background-color: var(--bg-tint);
-    border-radius: 50%;
-}
-
-.field-text {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-}
-
-.field-text label {
-    font-size: 10px;
-    font-weight: 800;
-    color: var(--text-muted);
-    letter-spacing: 0.6px;
-    margin-bottom: 2px;
-}
-
-.field-text input {
-    border: none;
-    outline: none;
-    font-size: 14.5px;
-    font-weight: 600;
-    color: var(--text-main);
-    background: transparent;
-    padding: 2px 0;
-    width: 100%;
-}
-
-.field-text input:focus {
-    color: var(--primary-blue);
-}
-
-.field-text input::placeholder {
-    color: #a4aabf;
-    font-weight: 400;
-}
-
-/* Divider & Swap Button */
-.route-divider {
-    position: relative;
-    height: 1px;
-    background-color: #ebedf5;
-    margin: 8px 0;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-}
-
-.swap-btn {
-    position: absolute;
-    right: 4px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #f1f4fb;
-    border: 1.5px solid #dce2f4;
-    border-radius: 10px;
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.swap-btn:hover {
-    background: #e4e9f9;
-}
-
-/* Yellow CTA Button */
-.btn-cta {
-    width: 100%;
-    background-color: var(--accent-yellow);
-    border: none;
-    border-radius: var(--radius-md);
-    padding: 15px 20px;
-    margin-top: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: 800;
-    color: var(--text-main);
-    box-shadow: 0 4px 14px rgba(254, 210, 50, 0.4);
-}
-
-.btn-cta:hover {
-    background-color: var(--accent-yellow-hover);
-}
-
-.btn-arrow {
-    stroke: #181938;
 }
 
 /* =========================================================
@@ -923,28 +1002,13 @@ button, input {
    Responsive Breakpoints
    ========================================================= */
 @media (max-width: 1024px) {
-    .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 36px;
+    .hero-inner-content {
+        padding: 36px 32px 32px 32px;
     }
 
-    .hero-text-col {
-        padding-right: 0;
-        text-align: center;
-    }
-
-    .hero-tagline-badge {
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .hero-lead {
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .hero-stats-row {
-        justify-content: center;
+    .hero-decor-graphic {
+        width: 260px;
+        height: 260px;
     }
 
     .places-grid {
@@ -958,16 +1022,73 @@ button, input {
 }
 
 @media (max-width: 768px) {
-    .navbar-container {
-        height: 64px;
+    .navbar-wrapper {
+        top: 8px;
+        padding: 8px 0 6px;
     }
 
-    .nav-menu {
-        display: none; /* Hide top nav links on smaller screens (clean no-JS web header) */
+    .floating-navbar {
+        padding: 6px 14px 6px 18px;
+    }
+
+    .navbar-menu {
+        display: none; /* Hide textual menu on mobile for a clean pill header */
+    }
+
+    .hero-banner-card {
+        border-radius: 24px;
+        min-height: 480px;
+    }
+
+    .hero-inner-content {
+        padding: 28px 20px 24px 20px;
+        min-height: 480px;
     }
 
     .hero-title {
         font-size: 34px;
+    }
+
+    .hero-lead {
+        font-size: 15px;
+    }
+
+    .hero-search-wrapper {
+        margin-top: 32px;
+    }
+
+    .hero-search-card {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 16px;
+        border-radius: 20px;
+    }
+
+    .search-field {
+        width: 100%;
+    }
+
+    .btn-swap-locations {
+        align-self: center;
+        margin: -4px 0;
+    }
+
+    .btn-search-action {
+        width: 100%;
+        height: 50px;
+        border-radius: 14px;
+    }
+
+    .hero-decor-graphic {
+        width: 180px;
+        height: 180px;
+        opacity: 0.6;
+    }
+
+    .hero-stats-row {
+        flex-direction: column;
+        gap: 12px;
     }
 
     .benefits-grid {
@@ -999,20 +1120,33 @@ button, input {
 
 @media (max-width: 520px) {
     .container {
-        padding-left: 16px;
-        padding-right: 16px;
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .hero-container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .floating-navbar {
+        padding: 6px 12px;
+    }
+
+    .brand-text {
+        font-size: 22px;
+    }
+
+    .hero-title {
+        font-size: 28px;
+    }
+
+    .hero-decor-graphic {
+        display: none;
     }
 
     .places-grid {
         grid-template-columns: 1fr;
-    }
-
-    .hero-card {
-        padding: 24px 18px;
-    }
-
-    .route-box {
-        padding: 14px;
     }
 
     .highlight-banner {
