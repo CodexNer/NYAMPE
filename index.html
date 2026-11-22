@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700;1,800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=2.3">
+    <link rel="stylesheet" href="style.css?v=2.8">
 </head>
 <body>
 
@@ -32,20 +32,22 @@
                         </svg>
                     </button>
                     
-                    <!-- Profile & Dropdown (Jelajah, Destinasi, Komunitas) -->
-                    <div class="nav-profile-dropdown" id="navProfileDropdown">
-                        <button type="button" class="nav-profile-trigger" id="dropdownToggleBtn" aria-expanded="false" aria-haspopup="true" aria-label="Buka Menu Navigasi & Profil">
-                            <img src="assets/avatar.jpg" 
-                                 alt="Foto Profil Pengguna" 
-                                 class="nav-avatar-img"
-                                 onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80'">
-                            <span class="dropdown-menu-icon" aria-hidden="true" title="Menu Navigasi">
-                                <svg class="hamburger-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                    <line x1="4" y1="6" x2="20" y2="6"></line>
-                                    <line x1="4" y1="12" x2="20" y2="12"></line>
-                                    <line x1="4" y1="18" x2="20" y2="18"></line>
-                                </svg>
-                            </span>
+                    <!-- Profile Avatar (Separate Highlight / Independent Item) -->
+                    <a href="#beranda" class="nav-profile-btn" aria-label="Profil Pengguna" title="Profil Pengguna">
+                        <img src="assets/avatar.jpg" 
+                             alt="Foto Profil Pengguna" 
+                             class="nav-avatar-img"
+                             onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80'">
+                    </a>
+                    
+                    <!-- Dropdown Menu Trigger (Separate Hamburger Icon Button) -->
+                    <div class="nav-dropdown-wrapper" id="navProfileDropdown">
+                        <button type="button" class="nav-menu-btn" id="dropdownToggleBtn" aria-expanded="false" aria-haspopup="true" aria-label="Buka Menu Navigasi" title="Menu Navigasi">
+                            <svg class="hamburger-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="4" y1="6" x2="20" y2="6"></line>
+                                <line x1="4" y1="12" x2="20" y2="12"></line>
+                                <line x1="4" y1="18" x2="20" y2="18"></line>
+                            </svg>
                         </button>
 
                         <!-- Dropdown Options Menu -->
@@ -107,16 +109,7 @@
                         
                         <!-- Left Text Content -->
                         <div class="hero-caption">
-                            <!-- Yellow Accent Dashes -->
-                            <div class="hero-accent-dashes" aria-hidden="true">
-                                <span></span>
-                                <span></span>
-                            </div>
-
-                            <h1 class="hero-title">
-                                Jelajah Kota,<br>
-                                Cara Kamu.
-                            </h1>
+                            <h1 class="hero-title">Jelajah Kota, Cara Kamu.</h1>
 
                             <p class="hero-lead">
                                 Temukan rute terbaik, langkah demi langkah, dengan panduan yang jelas.
@@ -152,21 +145,45 @@
                                     </div>
                                 </div>
 
-                                <!-- Center Column: Text Inputs Stack -->
+                                <!-- Center Column: Route Select Dropdowns -->
                                 <div class="route-inputs-col">
-                                    <!-- Field 1: Lokasi Awal -->
+                                    <!-- Field 1: Lokasi Awal Dropdown -->
                                     <div class="route-input-row">
-                                        <label for="originInput" class="field-label">Lokasi awal</label>
-                                        <input type="text" id="originInput" name="origin" value="Pilih lokasi awal" placeholder="Pilih lokasi awal" autocomplete="off">
+                                        <label for="originSelect" class="field-label">Lokasi awal</label>
+                                        <div class="route-select-wrapper">
+                                            <select id="originSelect" name="origin" class="route-select" aria-label="Lokasi awal">
+                                                <option value="" disabled selected>Pilih lokasi awal</option>
+                                                <option value="USU">USU</option>
+                                                <option value="Delipark mall">Delipark mall</option>
+                                                <option value="ringroad city walks">ringroad city walks</option>
+                                            </select>
+                                            <span class="route-select-arrow" aria-hidden="true">
+                                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path d="M6 9l6 6 6-6"/>
+                                                </svg>
+                                            </span>
+                                        </div>
                                     </div>
 
                                     <!-- Subtle Divider Line -->
                                     <div class="route-input-divider" aria-hidden="true"></div>
 
-                                    <!-- Field 2: Mau ke mana? -->
+                                    <!-- Field 2: Mau ke mana? Dropdown -->
                                     <div class="route-input-row">
-                                        <label for="destInput" class="field-label">Mau ke mana?</label>
-                                        <input type="text" id="destInput" name="destination" value="Pilih tujuan" placeholder="Pilih tujuan" autocomplete="off">
+                                        <label for="destSelect" class="field-label">Mau ke mana?</label>
+                                        <div class="route-select-wrapper">
+                                            <select id="destSelect" name="destination" class="route-select" aria-label="Mau ke mana?">
+                                                <option value="" disabled selected>Pilih tujuan</option>
+                                                <option value="USU">USU</option>
+                                                <option value="Delipark mall">Delipark mall</option>
+                                                <option value="ringroad city walks">ringroad city walks</option>
+                                            </select>
+                                            <span class="route-select-arrow" aria-hidden="true">
+                                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path d="M6 9l6 6 6-6"/>
+                                                </svg>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -183,32 +200,6 @@
 
                     </div>
                 </div>
-
-                <!-- Quick Transit Highlights (Trans Metro Deli, Angkot, Kereta Api Bandara) -->
-                <div class="hero-stats-row">
-                    <div class="stat-badge">
-                        <span class="stat-icon">🚌</span>
-                        <div class="stat-info">
-                            <strong>Trans Metro Deli</strong>
-                            <small>5 Koridor BTS Teman Bus</small>
-                        </div>
-                    </div>
-                    <div class="stat-badge">
-                        <span class="stat-icon">🚐</span>
-                        <div class="stat-info">
-                            <strong>Angkot Medan</strong>
-                            <small>120+ Nomor Trayek Terdata</small>
-                        </div>
-                    </div>
-                    <div class="stat-badge">
-                        <span class="stat-icon">🚆</span>
-                        <div class="stat-info">
-                            <strong>KAI Bandara & Komuter</strong>
-                            <small>Medan - Kualanamu & Binjai</small>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </section>
 
@@ -231,14 +222,14 @@
                     </a>
                 </div>
 
-                <!-- Locations Grid (Responsive Cards) -->
+                <!-- Locations Grid (Responsive Cards: 3 Popular Destinations) -->
                 <div class="places-grid">
                     <!-- Location Card 1: USU -->
-                    <article class="place-card" data-location="USU, Medan">
+                    <article class="place-card" data-location="USU">
                         <div class="place-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400&auto=format&fit=crop&q=80" 
-                                 alt="Universitas Sumatera Utara (USU)" 
-                                 onerror="this.src='https://placehold.co/400x260/1e293b/ffffff?text=USU+Medan'">
+                            <img src="assets/usu.jpg" 
+                                 alt="USU (Universitas Sumatera Utara)" 
+                                 onerror="this.src='https://placehold.co/600x380/1e293b/ffffff?text=USU+Medan'">
                             <span class="place-tag">Pendidikan</span>
                         </div>
                         <div class="place-content">
@@ -253,62 +244,42 @@
                         </div>
                     </article>
 
-                    <!-- Location Card 2: Center Point -->
-                    <article class="place-card" data-location="Center Point Medan">
+                    <!-- Location Card 2: Delipark Mall -->
+                    <article class="place-card" data-location="Delipark mall">
                         <div class="place-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1519567241046-7f570eee3ce6?w=400&auto=format&fit=crop&q=80" 
-                                 alt="Mall Center Point Medan" 
-                                 onerror="this.src='https://placehold.co/400x260/1e293b/ffffff?text=Center+Point'">
-                            <span class="place-tag">Lifestyle</span>
+                            <img src="assets/delipark.jpg" 
+                                 alt="Delipark Mall Medan" 
+                                 onerror="this.src='https://placehold.co/600x380/282f94/ffffff?text=Delipark+Mall'">
+                            <span class="place-tag">Shopping &amp; Lifestyle</span>
                         </div>
                         <div class="place-content">
                             <div class="place-header">
-                                <h3 class="place-name">Center Point</h3>
+                                <h3 class="place-name">Delipark mall</h3>
                                 <span class="place-category">Pusat Belanja</span>
                             </div>
-                            <p class="place-desc">Mall modern di jantung kota Medan, tepat di sebelah timur Stasiun Besar Kereta Api Medan.</p>
+                            <p class="place-desc">Superblock modern di pusat kota Medan dengan akses mudah dari Lapangan Merdeka dan Kesawan.</p>
                             <div class="place-footer">
-                                <span class="place-transit">🚶 3 Menit dari Stasiun Medan</span>
+                                <span class="place-transit">🚌 Koridor 1, 3 TMD • 🚶 Dekat Lap. Merdeka</span>
                             </div>
                         </div>
                     </article>
 
-                    <!-- Location Card 3: Stasiun Medan -->
-                    <article class="place-card" data-location="Stasiun Medan">
+                    <!-- Location Card 3: Ringroad City Walks -->
+                    <article class="place-card" data-location="ringroad city walks">
                         <div class="place-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1474487548417-781cb71495f3?w=400&auto=format&fit=crop&q=80" 
-                                 alt="Stasiun Kereta Api Medan" 
-                                 onerror="this.src='https://placehold.co/400x260/1e293b/ffffff?text=Stasiun+Medan'">
-                            <span class="place-tag">Hub Transit</span>
+                            <img src="assets/ringroad-citywalks.jpg" 
+                                 alt="Ringroad City Walks Medan" 
+                                 onerror="this.src='https://placehold.co/600x380/1a365d/ffffff?text=Ringroad+City+Walks'">
+                            <span class="place-tag">Mall &amp; Hiburan</span>
                         </div>
                         <div class="place-content">
                             <div class="place-header">
-                                <h3 class="place-name">Stasiun Medan</h3>
-                                <span class="place-category">Transportasi</span>
+                                <h3 class="place-name">ringroad city walks</h3>
+                                <span class="place-category">Hiburan</span>
                             </div>
-                            <p class="place-desc">Titik temu KA Bandara Railink, KA Sri Lelawangsa Binjai, dan titik integrasi halte bus kota.</p>
+                            <p class="place-desc">Destinasi favorit warga Medan barat dengan bioskop XXI dan pusat kuliner di Jalan Gagak Hitam.</p>
                             <div class="place-footer">
-                                <span class="place-transit">🚆 Terminal Railink & Halte Lap. Merdeka</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Location Card 4: Istana Maimun -->
-                    <article class="place-card" data-location="Istana Maimun Medan">
-                        <div class="place-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=400&auto=format&fit=crop&q=80" 
-                                 alt="Istana Maimun Medan" 
-                                 onerror="this.src='https://placehold.co/400x260/1e293b/ffffff?text=Istana+Maimun'">
-                            <span class="place-tag">Sejarah</span>
-                        </div>
-                        <div class="place-content">
-                            <div class="place-header">
-                                <h3 class="place-name">Istana Maimun</h3>
-                                <span class="place-category">Wisata Budaya</span>
-                            </div>
-                            <p class="place-desc">Ikon peninggalan Kesultanan Deli di Jalan Brigjend Katamso dengan rute akses angkot langsung.</p>
-                            <div class="place-footer">
-                                <span class="place-transit">🚐 Angkot Trayek Katamso & Masjid Raya</span>
+                                <span class="place-transit">🚐 Angkot 138, 64 • 🚌 Akses Ring Road</span>
                             </div>
                         </div>
                     </article>
@@ -405,46 +376,64 @@
 
                 <div class="modes-grid">
                     <!-- Transit Card 1: Trans Metro Deli -->
-                    <div class="mode-card">
-                        <div class="mode-icon-circle">🚌</div>
-                        <h3 class="mode-title">Trans Metro Deli (TMD)</h3>
-                        <p class="mode-desc">
-                            Bus modern ber-AC dengan skema Teman Bus. Melayani koridor utama seperti Terminal Amplas, Pinang Baris, Lapangan Merdeka, Tuntungan, dan Belawan dengan pembayaran non-tunai (Tap Cash/QRIS).
-                        </p>
-                        <ul class="mode-features">
-                            <li>Armada ber-AC & nyaman</li>
-                            <li>Halte resmi terjadwal</li>
-                            <li>Pembayaran cashless (E-Money/QRIS)</li>
-                        </ul>
-                    </div>
+                    <article class="mode-card">
+                        <div class="mode-img-wrap">
+                            <img src="assets/transit-tmd.jpg" 
+                                 alt="Trans Metro Deli (TMD) Medan" 
+                                 onerror="this.src='https://placehold.co/600x340/282f94/ffffff?text=Trans+Metro+Deli'">
+                        </div>
+                        <div class="mode-content">
+                            <h3 class="mode-title">Trans Metro Deli (TMD)</h3>
+                            <p class="mode-desc">
+                                Bus modern ber-AC dengan skema Teman Bus. Melayani koridor utama seperti Terminal Amplas, Pinang Baris, Lapangan Merdeka, Tuntungan, dan Belawan dengan pembayaran non-tunai (Tap Cash/QRIS).
+                            </p>
+                            <ul class="mode-features">
+                                <li>Armada ber-AC &amp; nyaman</li>
+                                <li>Halte resmi terjadwal</li>
+                                <li>Pembayaran cashless (E-Money/QRIS)</li>
+                            </ul>
+                        </div>
+                    </article>
 
                     <!-- Transit Card 2: Angkutan Kota (Angkot) -->
-                    <div class="mode-card">
-                        <div class="mode-icon-circle">🚐</div>
-                        <h3 class="mode-title">Angkutan Kota (Angkot)</h3>
-                        <p class="mode-desc">
-                            Jaringan transportasi terluas yang menembus lorong dan jalan penghubung kota. Dioperasikan oleh KPUM, Morina, Medan Bus, Rahayu, dan lainnya dengan kode nomor trayek di kaca depan.
-                        </p>
-                        <ul class="mode-features">
-                            <li>Menjangkau pelosok & gang kampus</li>
-                            <li>Frekuensi armada tinggi</li>
-                            <li>Tarif terjangkau mulai Rp5.000</li>
-                        </ul>
-                    </div>
+                    <article class="mode-card">
+                        <div class="mode-img-wrap">
+                            <img src="assets/transit-angkot.jpg" 
+                                 alt="Angkutan Kota (Angkot) Medan" 
+                                 onerror="this.src='https://placehold.co/600x340/8c285a/ffffff?text=Angkot+Medan'">
+                        </div>
+                        <div class="mode-content">
+                            <h3 class="mode-title">Angkutan Kota (Angkot)</h3>
+                            <p class="mode-desc">
+                                Jaringan transportasi terluas yang menembus lorong dan jalan penghubung kota. Dioperasikan oleh KPUM, Morina, Medan Bus, Rahayu, dan lainnya dengan kode nomor trayek di kaca depan.
+                            </p>
+                            <ul class="mode-features">
+                                <li>Menjangkau pelosok &amp; gang kampus</li>
+                                <li>Frekuensi armada tinggi</li>
+                                <li>Tarif terjangkau mulai Rp5.000</li>
+                            </ul>
+                        </div>
+                    </article>
 
                     <!-- Transit Card 3: Kereta Api & Bandara -->
-                    <div class="mode-card">
-                        <div class="mode-icon-circle">🚆</div>
-                        <h3 class="mode-title">KAI & Railink Bandara</h3>
-                        <p class="mode-desc">
-                            Bebas hambatan macet dari pusat kota ke Bandara Internasional Kualanamu (KNO) via Kereta Api Bandara, serta komuter Sri Lelawangsa menghubungkan Medan dengan Kota Binjai.
-                        </p>
-                        <ul class="mode-features">
-                            <li>Kecepatan & waktu tempuh pasti</li>
-                            <li>Terintegrasi di Stasiun Besar Medan</li>
-                            <li>Fasilitas bagasi & tempat duduk nyaman</li>
-                        </ul>
-                    </div>
+                    <article class="mode-card">
+                        <div class="mode-img-wrap">
+                            <img src="assets/transit-kai.jpg" 
+                                 alt="KAI &amp; Railink Bandara Medan" 
+                                 onerror="this.src='https://placehold.co/600x340/1a5a8c/ffffff?text=KAI+Railink+Medan'">
+                        </div>
+                        <div class="mode-content">
+                            <h3 class="mode-title">KAI &amp; Railink Bandara</h3>
+                            <p class="mode-desc">
+                                Bebas hambatan macet dari pusat kota ke Bandara Internasional Kualanamu (KNO) via Kereta Api Bandara, serta komuter Sri Lelawangsa menghubungkan Medan dengan Kota Binjai.
+                            </p>
+                            <ul class="mode-features">
+                                <li>Kecepatan &amp; waktu tempuh pasti</li>
+                                <li>Terintegrasi di Stasiun Besar Medan</li>
+                                <li>Fasilitas bagasi &amp; tempat duduk nyaman</li>
+                            </ul>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
@@ -491,55 +480,49 @@
                         <li><a href="#panduan-medan">Titik Transit Lap. Merdeka</a></li>
                     </ul>
                 </div>
-
-                <div class="footer-nav-col">
-                    <h4 class="footer-heading">Praktikum</h4>
-                    <p class="footer-info-text">
-                        Praktikum Pemrograman Web 1 (PW 1)<br>
-                        Implementasi Desain Web Responsif murni menggunakan Semantic HTML5 &amp; Modern CSS (No JS).
-                    </p>
-                </div>
             </div>
 
             <div class="footer-bottom">
                 <p>&copy; 2026 NYAMPE. Seluruh hak cipta dilindungi.</p>
                 <div class="footer-meta">
                     <span>Kota Medan, Sumatera Utara</span>
-                    <span>•</span>
-                    <span>Praktikum PW 1</span>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Optional Interactive Enhancements (Swap Location, Input Focus, & Profile Dropdown) -->
+    <!-- Interactive Script (Location Dropdowns, Swap, & Navbar Dropdown) -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Swap Route Locations
+            // Swap Route Locations (originSelect <-> destSelect)
             const swapBtn = document.getElementById('swapBtn');
-            const originInput = document.getElementById('originInput');
-            const destInput = document.getElementById('destInput');
+            const originSelect = document.getElementById('originSelect');
+            const destSelect = document.getElementById('destSelect');
 
-            if (swapBtn && originInput && destInput) {
+            if (swapBtn && originSelect && destSelect) {
                 swapBtn.addEventListener('click', function(e) {
                     e.preventDefault();
-                    const temp = originInput.value;
-                    originInput.value = destInput.value;
-                    destInput.value = temp;
+                    const temp = originSelect.value;
+                    originSelect.value = destSelect.value;
+                    destSelect.value = temp;
                 });
             }
 
-            // Focus auto-select for inputs
-            [originInput, destInput].forEach(function(input) {
-                if (!input) return;
-                input.addEventListener('focus', function() {
-                    if (this.value === 'Pilih lokasi awal' || this.value === 'Pilih tujuan') {
-                        this.select();
+            // Popular Locations card click -> set destination dropdown
+            document.querySelectorAll('.place-card').forEach(function(card) {
+                card.addEventListener('click', function() {
+                    const loc = this.getAttribute('data-location');
+                    if (loc && destSelect) {
+                        destSelect.value = loc;
+                        const searchSection = document.getElementById('cari-rute');
+                        if (searchSection) {
+                            searchSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
                     }
                 });
             });
 
-            // Profile Dropdown Toggle
+            // Navbar Dropdown Toggle (Independent hamburger button)
             const dropdownContainer = document.getElementById('navProfileDropdown');
             const dropdownBtn = document.getElementById('dropdownToggleBtn');
 
@@ -550,30 +533,32 @@
                     dropdownBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
                 });
 
-                // Close when any item inside is clicked
+                // Close when any nav dropdown item inside is clicked
                 dropdownContainer.querySelectorAll('.dropdown-item').forEach(function(item) {
                     item.addEventListener('click', function() {
                         dropdownContainer.classList.remove('open');
                         dropdownBtn.setAttribute('aria-expanded', 'false');
                     });
                 });
-
-                // Close when clicking outside
-                document.addEventListener('click', function(e) {
-                    if (!dropdownContainer.contains(e.target)) {
-                        dropdownContainer.classList.remove('open');
-                        dropdownBtn.setAttribute('aria-expanded', 'false');
-                    }
-                });
-
-                // Close on Escape key
-                document.addEventListener('keydown', function(e) {
-                    if (e.key === 'Escape') {
-                        dropdownContainer.classList.remove('open');
-                        dropdownBtn.setAttribute('aria-expanded', 'false');
-                    }
-                });
             }
+
+            // Global Outside Click: Close nav dropdown
+            document.addEventListener('click', function(e) {
+                if (dropdownContainer && !dropdownContainer.contains(e.target)) {
+                    dropdownContainer.classList.remove('open');
+                    if (dropdownBtn) dropdownBtn.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            // Close on Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    if (dropdownContainer) {
+                        dropdownContainer.classList.remove('open');
+                        if (dropdownBtn) dropdownBtn.setAttribute('aria-expanded', 'false');
+                    }
+                }
+            });
         });
     </script>
 </body>
