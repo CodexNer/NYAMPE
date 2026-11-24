@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700;1,800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=2.8">
+    <link rel="stylesheet" href="style.css?v=3.3">
 </head>
 <body>
 
@@ -118,7 +118,7 @@
 
                         <!-- Floating Search / Route Planning Card (Sejajar 3 Icons Layout) -->
                         <div class="hero-search-wrapper" id="cari-rute">
-                            <form class="hero-search-card" action="#lokasi-populer" method="get">
+                            <form class="hero-search-card" id="routeSearchForm" action="usu-delipark.html" method="get">
                                 
                                 <!-- Left Column: 3 Perfectly Aligned Icons (Origin, Swap, Destination) -->
                                 <div class="route-icons-col">
@@ -132,36 +132,51 @@
 
                                     <!-- 2. Logo Garis Dua (Vertical Swap Button) -->
                                     <button type="button" class="btn-swap-locations" id="swapBtn" title="Tukar lokasi asal dan tujuan" aria-label="Tukar lokasi asal dan tujuan">
-                                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
                                             <path d="M7 4v16M3 8l4-4 4 4M17 20V4M13 16l4 4 4-4"/>
                                         </svg>
                                     </button>
 
                                     <!-- 3. Logo Lokasi Tujuan (Pin) -->
                                     <div class="route-node-icon icon-destination" aria-hidden="true" title="Lokasi Tujuan">
-                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="#282f94">
+                                        <svg width="17" height="17" viewBox="0 0 24 24" fill="#282f94">
                                             <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                                         </svg>
                                     </div>
                                 </div>
 
-                                <!-- Center Column: Route Select Dropdowns -->
+                                <!-- Center Column: Route Custom Dropdowns (Matching Nav Dropdown Style) -->
                                 <div class="route-inputs-col">
                                     <!-- Field 1: Lokasi Awal Dropdown -->
-                                    <div class="route-input-row">
-                                        <label for="originSelect" class="field-label">Lokasi awal</label>
-                                        <div class="route-select-wrapper">
-                                            <select id="originSelect" name="origin" class="route-select" aria-label="Lokasi awal">
-                                                <option value="" disabled selected>Pilih lokasi awal</option>
-                                                <option value="USU">USU</option>
-                                                <option value="Delipark mall">Delipark mall</option>
-                                                <option value="ringroad city walks">ringroad city walks</option>
-                                            </select>
-                                            <span class="route-select-arrow" aria-hidden="true">
+                                    <div class="route-dropdown-wrapper" id="originDropdownWrap">
+                                        <span class="field-label">Lokasi awal</span>
+                                        <button type="button" class="route-dropdown-trigger" id="originTriggerBtn" aria-expanded="false" aria-haspopup="true" aria-label="Pilih lokasi awal">
+                                            <span class="route-trigger-text placeholder" id="originDisplay">Pilih lokasi awal</span>
+                                            <span class="route-dropdown-arrow" aria-hidden="true">
                                                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
                                                     <path d="M6 9l6 6 6-6"/>
                                                 </svg>
                                             </span>
+                                        </button>
+                                        <input type="hidden" name="origin" id="originHiddenInput" value="">
+
+                                        <!-- Dropdown Menu (Matching Nav Dropdown) -->
+                                        <div class="dropdown-menu" id="originDropdownMenu" role="menu">
+                                            <div class="dropdown-header">
+                                                <span class="dropdown-header-title">Pilih Lokasi Awal</span>
+                                            </div>
+                                            <button type="button" class="dropdown-item" data-value="USU" role="menuitem">
+                                                <span class="dropdown-item-icon">🏛️</span>
+                                                <span class="dropdown-item-text">USU</span>
+                                            </button>
+                                            <button type="button" class="dropdown-item" data-value="Delipark mall" role="menuitem">
+                                                <span class="dropdown-item-icon">🛍️</span>
+                                                <span class="dropdown-item-text">Delipark mall</span>
+                                            </button>
+                                            <button type="button" class="dropdown-item" data-value="ringroad city walks" role="menuitem">
+                                                <span class="dropdown-item-icon">🏬</span>
+                                                <span class="dropdown-item-text">ringroad city walks</span>
+                                            </button>
                                         </div>
                                     </div>
 
@@ -169,20 +184,35 @@
                                     <div class="route-input-divider" aria-hidden="true"></div>
 
                                     <!-- Field 2: Mau ke mana? Dropdown -->
-                                    <div class="route-input-row">
-                                        <label for="destSelect" class="field-label">Mau ke mana?</label>
-                                        <div class="route-select-wrapper">
-                                            <select id="destSelect" name="destination" class="route-select" aria-label="Mau ke mana?">
-                                                <option value="" disabled selected>Pilih tujuan</option>
-                                                <option value="USU">USU</option>
-                                                <option value="Delipark mall">Delipark mall</option>
-                                                <option value="ringroad city walks">ringroad city walks</option>
-                                            </select>
-                                            <span class="route-select-arrow" aria-hidden="true">
+                                    <div class="route-dropdown-wrapper" id="destDropdownWrap">
+                                        <span class="field-label">Mau ke mana?</span>
+                                        <button type="button" class="route-dropdown-trigger" id="destTriggerBtn" aria-expanded="false" aria-haspopup="true" aria-label="Pilih tujuan">
+                                            <span class="route-trigger-text placeholder" id="destDisplay">Pilih tujuan</span>
+                                            <span class="route-dropdown-arrow" aria-hidden="true">
                                                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
                                                     <path d="M6 9l6 6 6-6"/>
                                                 </svg>
                                             </span>
+                                        </button>
+                                        <input type="hidden" name="destination" id="destHiddenInput" value="">
+
+                                        <!-- Dropdown Menu (Matching Nav Dropdown) -->
+                                        <div class="dropdown-menu" id="destDropdownMenu" role="menu">
+                                            <div class="dropdown-header">
+                                                <span class="dropdown-header-title">Pilih Tujuan</span>
+                                            </div>
+                                            <button type="button" class="dropdown-item" data-value="USU" role="menuitem">
+                                                <span class="dropdown-item-icon">🏛️</span>
+                                                <span class="dropdown-item-text">USU</span>
+                                            </button>
+                                            <button type="button" class="dropdown-item" data-value="Delipark mall" role="menuitem">
+                                                <span class="dropdown-item-icon">🛍️</span>
+                                                <span class="dropdown-item-text">Delipark mall</span>
+                                            </button>
+                                            <button type="button" class="dropdown-item" data-value="ringroad city walks" role="menuitem">
+                                                <span class="dropdown-item-icon">🏬</span>
+                                                <span class="dropdown-item-text">ringroad city walks</span>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -481,29 +511,125 @@
         </div>
     </footer>
 
-    <!-- Interactive Script (Location Dropdowns, Swap, & Navbar Dropdown) -->
+    <!-- Interactive Script (Custom Dropdowns, Swap, & Navbar Dropdown) -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Swap Route Locations (originSelect <-> destSelect)
-            const swapBtn = document.getElementById('swapBtn');
-            const originSelect = document.getElementById('originSelect');
-            const destSelect = document.getElementById('destSelect');
+            // Location Dropdowns
+            const originWrap = document.getElementById('originDropdownWrap');
+            const originTrigger = document.getElementById('originTriggerBtn');
+            const originDisplay = document.getElementById('originDisplay');
+            const originInput = document.getElementById('originHiddenInput');
 
-            if (swapBtn && originSelect && destSelect) {
-                swapBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const temp = originSelect.value;
-                    originSelect.value = destSelect.value;
-                    destSelect.value = temp;
+            const destWrap = document.getElementById('destDropdownWrap');
+            const destTrigger = document.getElementById('destTriggerBtn');
+            const destDisplay = document.getElementById('destDisplay');
+            const destInput = document.getElementById('destHiddenInput');
+
+            function closeRouteDropdowns() {
+                if (originWrap) {
+                    originWrap.classList.remove('open');
+                    if (originTrigger) originTrigger.setAttribute('aria-expanded', 'false');
+                }
+                if (destWrap) {
+                    destWrap.classList.remove('open');
+                    if (destTrigger) destTrigger.setAttribute('aria-expanded', 'false');
+                }
+            }
+
+            // Origin Dropdown Toggle
+            if (originWrap && originTrigger) {
+                originTrigger.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const wasOpen = originWrap.classList.contains('open');
+                    closeRouteDropdowns();
+                    if (!wasOpen) {
+                        originWrap.classList.add('open');
+                        originTrigger.setAttribute('aria-expanded', 'true');
+                    }
+                });
+
+                originWrap.querySelectorAll('.dropdown-item').forEach(function(item) {
+                    item.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const val = this.getAttribute('data-value');
+                        if (val) {
+                            originDisplay.textContent = val;
+                            originDisplay.classList.remove('placeholder');
+                            if (originInput) originInput.value = val;
+                        }
+                        closeRouteDropdowns();
+                    });
                 });
             }
 
-            // Popular Locations card click -> set destination dropdown
+            // Destination Dropdown Toggle
+            if (destWrap && destTrigger) {
+                destTrigger.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const wasOpen = destWrap.classList.contains('open');
+                    closeRouteDropdowns();
+                    if (!wasOpen) {
+                        destWrap.classList.add('open');
+                        destTrigger.setAttribute('aria-expanded', 'true');
+                    }
+                });
+
+                destWrap.querySelectorAll('.dropdown-item').forEach(function(item) {
+                    item.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const val = this.getAttribute('data-value');
+                        if (val) {
+                            destDisplay.textContent = val;
+                            destDisplay.classList.remove('placeholder');
+                            if (destInput) destInput.value = val;
+                        }
+                        closeRouteDropdowns();
+                    });
+                });
+            }
+
+            // Swap Route Locations
+            const swapBtn = document.getElementById('swapBtn');
+            if (swapBtn && originDisplay && destDisplay) {
+                swapBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    closeRouteDropdowns();
+
+                    const originText = originDisplay.textContent;
+                    const originIsPlaceholder = originDisplay.classList.contains('placeholder');
+                    const originVal = originInput ? originInput.value : '';
+
+                    const destText = destDisplay.textContent;
+                    const destIsPlaceholder = destDisplay.classList.contains('placeholder');
+                    const destVal = destInput ? destInput.value : '';
+
+                    // Swap
+                    originDisplay.textContent = destText;
+                    if (destIsPlaceholder) {
+                        originDisplay.classList.add('placeholder');
+                    } else {
+                        originDisplay.classList.remove('placeholder');
+                    }
+                    if (originInput) originInput.value = destVal;
+
+                    destDisplay.textContent = originText;
+                    if (originIsPlaceholder) {
+                        destDisplay.classList.add('placeholder');
+                    } else {
+                        destDisplay.classList.remove('placeholder');
+                    }
+                    if (destInput) destInput.value = originVal;
+                });
+            }
+
+            // Popular Locations card click -> set destination
             document.querySelectorAll('.place-card').forEach(function(card) {
                 card.addEventListener('click', function() {
                     const loc = this.getAttribute('data-location');
-                    if (loc && destSelect) {
-                        destSelect.value = loc;
+                    if (loc && destDisplay) {
+                        destDisplay.textContent = loc;
+                        destDisplay.classList.remove('placeholder');
+                        if (destInput) destInput.value = loc;
                         const searchSection = document.getElementById('cari-rute');
                         if (searchSection) {
                             searchSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -512,40 +638,76 @@
                 });
             });
 
-            // Navbar Dropdown Toggle (Independent hamburger button)
-            const dropdownContainer = document.getElementById('navProfileDropdown');
-            const dropdownBtn = document.getElementById('dropdownToggleBtn');
+            // Route Search Form: Forward to usu-delipark.html when USU & Delipark are selected
+            const searchForm = document.getElementById('routeSearchForm') || document.querySelector('.hero-search-card');
+            if (searchForm) {
+                searchForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
 
-            if (dropdownContainer && dropdownBtn) {
-                dropdownBtn.addEventListener('click', function(e) {
+                    const originVal = (originInput ? originInput.value : '').trim().toLowerCase();
+                    const destVal = (destInput ? destInput.value : '').trim().toLowerCase();
+
+                    // Validasi: pastikan kedua lokasi sudah dipilih
+                    if (!originVal || !destVal) {
+                        alert('Silakan pilih lokasi awal dan tujuan terlebih dahulu.');
+                        if (!originVal && originTrigger) {
+                            originTrigger.click();
+                        } else if (!destVal && destTrigger) {
+                            destTrigger.click();
+                        }
+                        return;
+                    }
+
+                    // Cek jika rute adalah USU ke Delipark mall (atau sebaliknya)
+                    const isUsuOrigin = originVal === 'usu';
+                    const isDeliparkDest = destVal.includes('delipark');
+                    const isDeliparkOrigin = originVal.includes('delipark');
+                    const isUsuDest = destVal === 'usu';
+
+                    if ((isUsuOrigin && isDeliparkDest) || (isDeliparkOrigin && isUsuDest)) {
+                        window.location.href = 'usu-delipark.html';
+                    } else {
+                        alert(`Rute dari "${originDisplay.textContent}" ke "${destDisplay.textContent}" sedang dipersiapkan. Saat ini rute yang tersedia adalah USU - Delipark mall.`);
+                    }
+                });
+            }
+
+            // Navbar Dropdown Toggle (Independent hamburger button)
+            const navDropdownWrap = document.getElementById('navProfileDropdown');
+            const navDropdownBtn = document.getElementById('dropdownToggleBtn');
+
+            if (navDropdownWrap && navDropdownBtn) {
+                navDropdownBtn.addEventListener('click', function(e) {
                     e.stopPropagation();
-                    const isOpen = dropdownContainer.classList.toggle('open');
-                    dropdownBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                    closeRouteDropdowns();
+                    const isOpen = navDropdownWrap.classList.toggle('open');
+                    navDropdownBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
                 });
 
-                // Close when any nav dropdown item inside is clicked
-                dropdownContainer.querySelectorAll('.dropdown-item').forEach(function(item) {
+                navDropdownWrap.querySelectorAll('.dropdown-item').forEach(function(item) {
                     item.addEventListener('click', function() {
-                        dropdownContainer.classList.remove('open');
-                        dropdownBtn.setAttribute('aria-expanded', 'false');
+                        navDropdownWrap.classList.remove('open');
+                        navDropdownBtn.setAttribute('aria-expanded', 'false');
                     });
                 });
             }
 
-            // Global Outside Click: Close nav dropdown
+            // Global Outside Click: Close all dropdowns
             document.addEventListener('click', function(e) {
-                if (dropdownContainer && !dropdownContainer.contains(e.target)) {
-                    dropdownContainer.classList.remove('open');
-                    if (dropdownBtn) dropdownBtn.setAttribute('aria-expanded', 'false');
+                closeRouteDropdowns();
+                if (navDropdownWrap && !navDropdownWrap.contains(e.target)) {
+                    navDropdownWrap.classList.remove('open');
+                    if (navDropdownBtn) navDropdownBtn.setAttribute('aria-expanded', 'false');
                 }
             });
 
             // Close on Escape key
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape') {
-                    if (dropdownContainer) {
-                        dropdownContainer.classList.remove('open');
-                        if (dropdownBtn) dropdownBtn.setAttribute('aria-expanded', 'false');
+                    closeRouteDropdowns();
+                    if (navDropdownWrap) {
+                        navDropdownWrap.classList.remove('open');
+                        if (navDropdownBtn) navDropdownBtn.setAttribute('aria-expanded', 'false');
                     }
                 }
             });
