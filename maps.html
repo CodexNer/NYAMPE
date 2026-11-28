@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="id" class="map-view-html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rute USU ke DeliPark Mall - NYAMPE Medan</title>
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700;1,800&display=swap" rel="stylesheet">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css?v=5.1">
+    <!-- Map View Page Stylesheet -->
+    <link rel="stylesheet" href="maps.css?v=1.2">
+</head>
+<body class="map-view-body">
+
+    <!-- Background Map Layer (Asset switches dynamically per selected route & transport mode) -->
+    <main class="map-canvas" id="mapCanvas">
+        <img src="assets/usu-delipark/map_bus.png" 
+             alt="Peta Rute USU ke Delipark mall" 
+             class="map-image"
+             id="mapImage">
+    </main>
+
+    <!-- Floating UI Overlay (Top Route Card & Bottom Option Card) -->
+    <div class="map-overlay">
+        
+        <!-- Top Bar: Logo & Route Input Header -->
+        <header class="map-top-bar">
+            <div class="map-header-row">
+                <!-- Brand Logo (Click to Home) -->
+                <a href="index.html" class="map-logo-link" title="Kembali ke Beranda" aria-label="NYAMPE Beranda">
+                    <img src="assets/logo.png" alt="NYAMPE" class="map-logo-img">
+                </a>
+
+                <!-- Back to Home Button -->
+                <a href="index.html" class="map-back-btn" title="Kembali ke Pencarian Rute" aria-label="Kembali ke Beranda">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    <span>Beranda</span>
+                </a>
+            </div>
+
+            <!-- Route Origin & Destination Card (Interactive Dropdowns from index.html) -->
+            <div class="route-header-card">
+                <div class="route-points-col">
+                    <!-- Origin Row -->
+                    <div class="route-point-row">
+                        <div class="point-icon origin-icon" aria-hidden="true">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="10" stroke="#282f94" stroke-width="3"/>
+                                <circle cx="12" cy="12" r="4.5" fill="#282f94"/>
+                            </svg>
+                        </div>
+                        <div class="point-text-wrap route-dropdown-wrapper" id="mapOriginDropdownWrap">
+                            <span class="point-label">BERANGKAT DARI</span>
+                            <button type="button" class="route-dropdown-trigger" id="mapOriginTriggerBtn" aria-expanded="false" aria-haspopup="true" aria-label="Pilih lokasi awal">
+                                <span class="point-name" id="mapOriginName">USU</span>
+                                <span class="route-dropdown-arrow" aria-hidden="true">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M6 9l6 6 6-6"/>
+                                    </svg>
+                                </span>
+                            </button>
+                            <div class="dropdown-menu" id="mapOriginDropdownMenu" role="menu">
+                                <div class="dropdown-header">
+                                    <span class="dropdown-header-title">Pilih Lokasi Awal</span>
+                                </div>
+                                <button type="button" class="dropdown-item active-loc" data-value="USU" role="menuitem">
+                                    <span class="dropdown-item-icon" aria-hidden="true">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M3 21h18M5 21V9l7-4 7 4v12M9 21v-6h6v6"/>
+                                        </svg>
+                                    </span>
+                                    <span class="dropdown-item-text">USU</span>
+                                </button>
+                                <button type="button" class="dropdown-item" data-value="Delipark mall" role="menuitem">
+                                    <span class="dropdown-item-icon" aria-hidden="true">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                                            <line x1="3" y1="6" x2="21" y2="6"/>
+                                            <path d="M16 10a4 4 0 0 1-8 0"/>
+                                        </svg>
+                                    </span>
+                                    <span class="dropdown-item-text">Delipark mall</span>
+                                </button>
+                                <button type="button" class="dropdown-item" data-value="ringroad city walks" role="menuitem">
+                                    <span class="dropdown-item-icon" aria-hidden="true">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="3" y="7" width="18" height="14" rx="2"/>
+                                            <path d="M7 7V4a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3"/>
+                                            <line x1="9" y1="12" x2="9" y2="16"/>
+                                            <line x1="15" y1="12" x2="15" y2="16"/>
+                                        </svg>
+                                    </span>
+                                    <span class="dropdown-item-text">ringroad city walks</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Divider Line -->
+                    <div class="route-card-divider" aria-hidden="true"></div>
+
+                    <!-- Destination Row -->
+                    <div class="route-point-row">
+                        <div class="point-icon dest-icon" aria-hidden="true">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+                                <circle cx="12" cy="9" r="2.5" fill="#282f94"/>
+                            </svg>
+                        </div>
+                        <div class="point-text-wrap route-dropdown-wrapper" id="mapDestDropdownWrap">
+                            <span class="point-label">MAU KE MANA?</span>
+                            <button type="button" class="route-dropdown-trigger" id="mapDestTriggerBtn" aria-expanded="false" aria-haspopup="true" aria-label="Pilih tujuan">
+                                <span class="point-name" id="mapDestName">Delipark mall</span>
+                                <span class="route-dropdown-arrow" aria-hidden="true">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M6 9l6 6 6-6"/>
+                                    </svg>
+                                </span>
+                            </button>
+                            <div class="dropdown-menu" id="mapDestDropdownMenu" role="menu">
+                                <div class="dropdown-header">
+                                    <span class="dropdown-header-title">Pilih Tujuan</span>
+                                </div>
+                                <button type="button" class="dropdown-item" data-value="USU" role="menuitem">
+                                    <span class="dropdown-item-icon" aria-hidden="true">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M3 21h18M5 21V9l7-4 7 4v12M9 21v-6h6v6"/>
+                                        </svg>
+                                    </span>
+                                    <span class="dropdown-item-text">USU</span>
+                                </button>
+                                <button type="button" class="dropdown-item active-loc" data-value="Delipark mall" role="menuitem">
+                                    <span class="dropdown-item-icon" aria-hidden="true">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                                            <line x1="3" y1="6" x2="21" y2="6"/>
+                                            <path d="M16 10a4 4 0 0 1-8 0"/>
+                                        </svg>
+                                    </span>
+                                    <span class="dropdown-item-text">Delipark mall</span>
+                                </button>
+                                <button type="button" class="dropdown-item" data-value="ringroad city walks" role="menuitem">
+                                    <span class="dropdown-item-icon" aria-hidden="true">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="3" y="7" width="18" height="14" rx="2"/>
+                                            <path d="M7 7V4a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3"/>
+                                            <line x1="9" y1="12" x2="9" y2="16"/>
+                                            <line x1="15" y1="12" x2="15" y2="16"/>
+                                        </svg>
+                                    </span>
+                                    <span class="dropdown-item-text">ringroad city walks</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Swap Route Button -->
+                <button type="button" class="btn-swap-map" id="mapSwapBtn" title="Tukar lokasi asal dan tujuan" aria-label="Tukar lokasi asal dan tujuan">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M7 4v16M3 8l4-4 4 4M17 20V4M13 16l4 4 4-4"/>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Bottom Container: Mode Selector Drop-Up + Active Mode Card -->
+        <div class="map-bottom-container">
+            <article class="route-option-card">
+                
+                <!-- Bar Select with Drop-Up showing all 3 options -->
+                <div class="mode-select-wrapper" id="modeSelectWrap">
+                    <button type="button" class="mode-select-trigger" id="modeSelectTrigger" aria-expanded="false" aria-haspopup="true" aria-label="Pilih metode transportasi">
+                        <div class="mode-trigger-left" id="modeTriggerDisplay">
+                            <!-- Default active display: PILIHAN HEMAT -->
+                            <span class="mode-badge-pill">
+                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+                                    <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+                                </svg>
+                                <span>PILIHAN HEMAT</span>
+                            </span>
+                            <span class="mode-sub-tag">Bus TMD</span>
+                        </div>
+                        <div class="mode-trigger-right">
+                            <span>Opsi</span>
+                            <span class="mode-select-chevron" aria-hidden="true">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M18 15l-6-6-6 6"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </button>
+
+                    <!-- Drop-Up Menu (Opens Upwards Above the Bar) -->
+                    <div class="mode-dropup-menu" id="modeDropupMenu" role="menu">
+                        <div class="dropup-header">
+                            <span class="dropup-header-title">Pilih Metode Transportasi</span>
+                        </div>
+
+                        <!-- Option 1: PILIHAN HEMAT (Bus TMD) -->
+                        <button type="button" class="mode-dropup-item active" data-mode="hemat" role="menuitem">
+                            <div class="dropup-item-left">
+                                <div class="dropup-item-icon" aria-hidden="true">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+                                        <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+                                    </svg>
+                                </div>
+                                <div class="dropup-item-text">
+                                    <span class="dropup-item-title">PILIHAN HEMAT &middot; Bus TMD</span>
+                                    <span class="dropup-item-sub">Rp5.000 &middot; Estimasi 50 menit</span>
+                                </div>
+                            </div>
+                            <span class="dropup-check" aria-hidden="true">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </span>
+                        </button>
+
+                        <!-- Option 2: PILIHAN TERBAIK (Angkot) -->
+                        <button type="button" class="mode-dropup-item" data-mode="terbaik" role="menuitem">
+                            <div class="dropup-item-left">
+                                <div class="dropup-item-icon icon-yellow" aria-hidden="true">
+                                    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                    </svg>
+                                </div>
+                                <div class="dropup-item-text">
+                                    <span class="dropup-item-title">PILIHAN TERBAIK &middot; Angkot</span>
+                                    <span class="dropup-item-sub">Rp5.000 - Rp7.000 &middot; Estimasi 35 menit</span>
+                                </div>
+                            </div>
+                            <span class="dropup-check" aria-hidden="true">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </span>
+                        </button>
+
+                        <!-- Option 3: PILIHAN TERCEPAT (Ojol) -->
+                        <button type="button" class="mode-dropup-item" data-mode="tercepat" role="menuitem">
+                            <div class="dropup-item-left">
+                                <div class="dropup-item-icon" aria-hidden="true">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="13" cy="13" r="8"/>
+                                        <path d="M13 9v4l2.5 1.5M10 2h6M3 10h2M2 14h3M4 18h2"/>
+                                    </svg>
+                                </div>
+                                <div class="dropup-item-text">
+                                    <span class="dropup-item-title">PILIHAN TERCEPAT &middot; Ojol</span>
+                                    <span class="dropup-item-sub">Rp18.000–Rp35.000 &middot; 15–20 menit</span>
+                                </div>
+                            </div>
+                            <span class="dropup-check" aria-hidden="true">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- =================================================
+                     PANEL 1: PILIHAN HEMAT (Bus Trans Metro Deli)
+                     ================================================= -->
+                <div class="mode-panel active" id="panel-hemat">
+                    <p class="option-desc">Biaya lebih rendah, waktu sedikit lebih lama.</p>
+
+                    <div class="option-stats-row">
+                        <div class="stat-badge">
+                            <div class="stat-badge-icon" aria-hidden="true">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="2" y="6" width="20" height="12" rx="2.5"/>
+                                    <circle cx="12" cy="12" r="2.8"/>
+                                    <path d="M6 12h.01M18 12h.01"/>
+                                </svg>
+                            </div>
+                            <div class="stat-badge-info">
+                                <span class="stat-badge-label">Estimasi biaya</span>
+                                <span class="stat-badge-val">Rp5.000</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-badge">
+                            <div class="stat-badge-icon" aria-hidden="true">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="9"/>
+                                    <polyline points="12 6 12 12 15 15"/>
+                                </svg>
+                            </div>
+                            <div class="stat-badge-info">
+                                <span class="stat-badge-label">Estimasi waktu</span>
+                                <span class="stat-badge-val">50 menit</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="transit-timeline-wrap">
+                        <div class="transit-step-item">
+                            <div class="step-icon-bubble bubble-tint" aria-hidden="true">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="5" r="2"/>
+                                    <path d="m9 20 3-6 3 6M6 10l6-1 4 3M10 13l2-4"/>
+                                </svg>
+                            </div>
+                            <span class="step-title">Jalan kaki</span>
+                            <span class="step-duration">5–10 menit</span>
+                        </div>
+
+                        <div class="timeline-dash-line" aria-hidden="true"></div>
+
+                        <div class="transit-step-item">
+                            <div class="step-icon-bubble bubble-solid" aria-hidden="true">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M3 10V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4M2 10h20M5 14v6M19 14v6"/>
+                                    <rect x="7" y="11" width="10" height="7" rx="1.5"/>
+                                </svg>
+                            </div>
+                            <span class="step-title">Tunggu di Halte</span>
+                            <span class="step-duration">10 menit</span>
+                        </div>
+
+                        <div class="timeline-dash-line" aria-hidden="true"></div>
+
+                        <div class="transit-step-item">
+                            <div class="step-icon-bubble bubble-solid" aria-hidden="true">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="4" y="3" width="16" height="15" rx="3"/>
+                                    <path d="M4 11h16M8 3v4M16 3v4M6 18l-1.5 3M18 18l1.5 3M7 15h.01M17 15h.01"/>
+                                </svg>
+                            </div>
+                            <span class="step-title">Naik Bus</span>
+                            <span class="step-duration">20 menit</span>
+                        </div>
+
+                        <div class="timeline-dash-line" aria-hidden="true"></div>
+
+                        <div class="transit-step-item">
+                            <div class="step-icon-bubble bubble-tint" aria-hidden="true">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="5" r="2"/>
+                                    <path d="m9 20 3-6 3 6M6 10l6-1 4 3M10 13l2-4"/>
+                                </svg>
+                            </div>
+                            <span class="step-title">Jalan kaki</span>
+                            <span class="step-duration">5 menit</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- =================================================
+                     PANEL 2: PILIHAN TERBAIK (Angkot Medan)
+                     ================================================= -->
+                <div class="mode-panel" id="panel-terbaik">
+                    <p class="option-desc">Seimbang antara biaya, waktu, dan perpindahan.</p>
+
+                    <div class="option-stats-row">
+                        <div class="stat-badge">
+                            <div class="stat-badge-icon" aria-hidden="true">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="2" y="6" width="20" height="12" rx="2.5"/>
+                                    <circle cx="12" cy="12" r="2.8"/>
+                                    <path d="M6 12h.01M18 12h.01"/>
+                                </svg>
+                            </div>
+                            <div class="stat-badge-info">
+                                <span class="stat-badge-label">Estimasi biaya</span>
+                                <span class="stat-badge-val">Rp5.000 - Rp7.000</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-badge">
+                            <div class="stat-badge-icon" aria-hidden="true">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="9"/>
+                                    <polyline points="12 6 12 12 15 15"/>
+                                </svg>
+                            </div>
+                            <div class="stat-badge-info">
+                                <span class="stat-badge-label">Estimasi waktu</span>
+                                <span class="stat-badge-val">35 menit</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Angkot (3 Steps) -->
+                    <div class="transit-timeline-wrap">
+                        <div class="transit-step-item">
+                            <div class="step-icon-bubble bubble-tint" aria-hidden="true">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="5" r="2"/>
+                                    <path d="m9 20 3-6 3 6M6 10l6-1 4 3M10 13l2-4"/>
+                                </svg>
+                            </div>
+                            <span class="step-title">Jalan kaki</span>
+                            <span class="step-duration">5 menit</span>
+                        </div>
+
+                        <div class="timeline-dash-line" aria-hidden="true"></div>
+
+                        <div class="transit-step-item">
+                            <div class="step-icon-bubble bubble-solid" aria-hidden="true">
+                                <!-- Angkot Van SVG Icon -->
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M5 17h14v-6l-2-5H7L5 11v6z"/>
+                                    <path d="M5 11h14"/>
+                                    <circle cx="7.5" cy="17.5" r="1.5"/>
+                                    <circle cx="16.5" cy="17.5" r="1.5"/>
+                                </svg>
+                            </div>
+                            <span class="step-title">Naik angkot</span>
+                            <span class="step-duration">25 menit</span>
+                        </div>
+
+                        <div class="timeline-dash-line" aria-hidden="true"></div>
+
+                        <div class="transit-step-item">
+                            <div class="step-icon-bubble bubble-tint" aria-hidden="true">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="5" r="2"/>
+                                    <path d="m9 20 3-6 3 6M6 10l6-1 4 3M10 13l2-4"/>
+                                </svg>
+                            </div>
+                            <span class="step-title">Jalan kaki</span>
+                            <span class="step-duration">5 menit</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- =================================================
+                     PANEL 3: PILIHAN TERCEPAT (Ojol Motor & Mobil)
+                     ================================================= -->
+                <div class="mode-panel" id="panel-tercepat">
+                    <p class="option-desc">Sampai lebih cepat dengan sedikit biaya tambahan.</p>
+
+                    <div class="ojol-rows-wrap">
+                        <!-- Row 1: Ojol Motor -->
+                        <div class="ojol-row-grid">
+                            <div class="ojol-cell ojol-vehicle-cell">
+                                <span class="ojol-vehicle-name">Ojol Motor</span>
+                                <div class="ojol-vehicle-icon" aria-hidden="true">
+                                    <!-- Scooter / Motorcycle SVG -->
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="5.5" cy="17.5" r="2.5"/>
+                                        <circle cx="18.5" cy="17.5" r="2.5"/>
+                                        <path d="M15 6h2l2 7"/>
+                                        <path d="M5.5 15h8.5l2-5H12l-2 3H7"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="ojol-cell">
+                                <span class="ojol-cell-label">Estimasi biaya</span>
+                                <span class="ojol-cell-val">Rp18.000–<br>Rp20.000</span>
+                            </div>
+                            <div class="ojol-cell ojol-time-cell">
+                                <span class="ojol-cell-label">Estimasi waktu</span>
+                                <span class="ojol-cell-val">15 Menit</span>
+                            </div>
+                        </div>
+
+                        <!-- Row 2: Ojol Mobil -->
+                        <div class="ojol-row-grid">
+                            <div class="ojol-cell ojol-vehicle-cell">
+                                <span class="ojol-vehicle-name">Ojol Mobil</span>
+                                <div class="ojol-vehicle-icon" aria-hidden="true">
+                                    <!-- Car SVG -->
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 17h14v-5l-2.5-4.5h-9L5 12v5z"/>
+                                        <path d="M5 12h14"/>
+                                        <circle cx="7.5" cy="17" r="1.5"/>
+                                        <circle cx="16.5" cy="17" r="1.5"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="ojol-cell">
+                                <span class="ojol-cell-label">Estimasi biaya</span>
+                                <span class="ojol-cell-val">Rp25.000–<br>Rp35.000</span>
+                            </div>
+                            <div class="ojol-cell ojol-time-cell">
+                                <span class="ojol-cell-label">Estimasi waktu</span>
+                                <span class="ojol-cell-val">20 Menit</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA Button -->
+                <button type="button" class="btn-detail-action" id="btnDetailRoute">
+                    <span>Lihat detail rute</span>
+                </button>
+            </article>
+        </div>
+
+    </div>
+
+    <!-- Slide-up Detail Route Sheet / Modal (Dynamic per selected mode) -->
+    <div class="route-detail-sheet" id="routeDetailSheet" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="detail-sheet-backdrop" id="sheetBackdrop"></div>
+        <div class="detail-sheet-panel">
+            <div class="sheet-drag-handle" aria-hidden="true"></div>
+            
+            <div class="sheet-header">
+                <div>
+                    <span class="sheet-badge">PANDUAN LENGKAP</span>
+                    <h3 class="sheet-title" id="sheetTitle">Rute Bus: USU &rarr; DeliPark Mall</h3>
+                </div>
+                <button type="button" class="sheet-close-btn" id="sheetCloseBtn" aria-label="Tutup detail rute">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="sheet-content" id="sheetDynamicContent">
+                <!-- Dynamically filled by JS based on current mode -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Script for Map View Page -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const LOCATION_SLUGS = {
+                'USU': 'usu',
+                'Delipark mall': 'delipark',
+                'ringroad city walks': 'ringroad'
+            };
+
+            const LOCATION_ORDER = {
+                'usu': 0,
+                'delipark': 1,
+                'ringroad': 2
+            };
+
+            const MODE_SLUGS = {
+                hemat: 'bus',
+                terbaik: 'angkot',
+                tercepat: 'ojol'
+            };
+
+            const MODE_LABELS = {
+                hemat: 'Bus',
+                terbaik: 'Angkot',
+                tercepat: 'Ojol'
+            };
+
+            // Mode Definitions (Trigger Markup & Detail Sheet Data)
+            const MODES = {
+                hemat: {
+                    triggerHtml: `
+                        <span class="mode-badge-pill">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+                                <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+                            </svg>
+                            <span>PILIHAN HEMAT</span>
+                        </span>
+                        <span class="mode-sub-tag">Bus TMD</span>
+                    `,
+                    getSummary: (origin, dest) => {
+                        if (origin === 'USU' && dest === 'Delipark mall') {
+                            return {
+                                moda: 'Bus Listrik Medan (K2)',
+                                koridor: 'J City – Lapangan Merdeka – Plaza Medan Fair',
+                                tarif: 'Rp5.000 (Non-Tunai / QRIS)',
+                                waktu: '± 50 Menit Total'
+                            };
+                        }
+                        return {
+                            moda: 'Trans Metro Deli (TMD)',
+                            koridor: 'Koridor Utama Kota Medan',
+                            tarif: 'Rp5.000 (Non-Tunai / QRIS)',
+                            waktu: '± 50 Menit Total'
+                        };
+                    },
+                    getSteps: (origin, dest) => {
+                        if (origin === 'USU' && dest === 'Delipark mall') {
+                            return [
+                                { bullet: 'origin-bullet', title: 'Berjalan ke halte (5–10 menit)', desc: 'Dari area utama USU, berjalan ke Jl.Dr.Mansyur lalu ke halte simpang Jl.Dr.Mansyur dan tunggu bus nya.' },
+                                { bullet: 'bus-bullet', title: 'Naik bus listrik K2 (20 menit)', desc: 'Naik bus listrik K2 (Rute: J City – Lapangan Merdeka – Plaza Medan Fair).' },
+                                { bullet: 'dest-bullet', title: 'Turun di halte Delipark (5 menit)', desc: 'Turun di halte Delipark, dan lanjut berjalan ke Delipark.' }
+                            ];
+                        }
+                        return [
+                            { bullet: 'origin-bullet', title: `Titik Berangkat: ${origin}`, desc: `Jalan santai dari ${origin} menuju Halte Trans Metro Deli (TMD) terdekat. Waktu jalan kaki ± 5–10 menit.` },
+                            { bullet: 'wait-bullet', title: 'Tunggu di Halte Bus TMD', desc: 'Tunggu kedatangan armada bus TMD di halte. Interval kedatangan bus berkisar antara 8 hingga 12 menit. Siapkan kartu e-money atau aplikasi QRIS.' },
+                            { bullet: 'bus-bullet', title: 'Perjalanan Bus TMD', desc: `Naik bus ber-AC melewati rute koridor kota menuju area sekitar ${dest} (± 20 menit tergantung kepadatan lalu lintas).` },
+                            { bullet: 'dest-bullet', title: `Tiba di Halte Terdekat → ${dest}`, desc: `Turun di halte terdekat dengan kawasan ${dest}, lalu jalan kaki singkat ± 5 menit menuju pintu masuk utama.` }
+                        ];
+                    }
+                },
+                terbaik: {
+                    triggerHtml: `
+                        <span class="mode-badge-pill pill-yellow">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                            </svg>
+                            <span>PILIHAN TERBAIK</span>
+                        </span>
+                        <span class="mode-sub-tag">Angkot</span>
+                    `,
+                    getSummary: (origin, dest) => {
+                        if (origin === 'USU' && dest === 'Delipark mall') {
+                            return {
+                                moda: 'Angkutan Umum (Angkot)',
+                                koridor: 'Rahayu 104 (Padang Bulan – Pringgan – Aksara – UNIMED)',
+                                tarif: 'Rp5.000 - Rp7.000 (Tunai)',
+                                waktu: '± 35 Menit Total'
+                            };
+                        }
+                        return {
+                            moda: 'Angkutan Kota (Angkot Medan)',
+                            koridor: 'Trayek KPUM / Rahayu / Medan Bus',
+                            tarif: 'Rp5.000 - Rp7.000 (Tunai)',
+                            waktu: '± 35 Menit Total'
+                        };
+                    },
+                    getSteps: (origin, dest) => {
+                        if (origin === 'USU' && dest === 'Delipark mall') {
+                            return [
+                                { bullet: 'origin-bullet', title: 'Berjalan ke simpang (5–10 menit)', desc: 'Berjalan ke Jl.Dr.Mansyur lalu tunggu angkutan umum.' },
+                                { bullet: 'bus-bullet', title: 'Naik angkutan 104 (20 menit)', desc: 'Naik angkutan umum kode/nomor Rahayu 104 (Rute: Padang Bulan – Pringgan – Aksara – UNIMED).' },
+                                { bullet: 'dest-bullet', title: 'Turun di halte Delipark (5 menit)', desc: 'Turun di halte Delipark, dan lanjut berjalan ke Delipark.' }
+                            ];
+                        }
+                        return [
+                            { bullet: 'origin-bullet', title: `Menuju Pinggir Jalan Utama (${origin})`, desc: `Berjalan kaki sekitar 5 menit menuju jalan protokol di depan kawasan ${origin} untuk menyetop angkot.` },
+                            { bullet: 'bus-bullet', title: `Naik Angkot Arah ${dest}`, desc: `Naik angkot trayek yang melintasi jalur menuju ${dest} (seperti Rahayu, KPUM, atau Medan Bus) selama ± 25 menit.` },
+                            { bullet: 'dest-bullet', title: `Turun di Sekitar ${dest}`, desc: `Minta turun tepat di simpang atau depan kawasan ${dest}, lalu jalan kaki ± 5 menit langsung ke area tujuan.` }
+                        ];
+                    }
+                },
+                tercepat: {
+                    triggerHtml: `
+                        <span class="mode-badge-pill">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#282f94" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="13" cy="13" r="8"/>
+                                <path d="M13 9v4l2.5 1.5M10 2h6M3 10h2M2 14h3M4 18h2"/>
+                            </svg>
+                            <span>PILIHAN TERCEPAT</span>
+                        </span>
+                        <span class="mode-sub-tag">Ojol</span>
+                    `,
+                    getSummary: () => ({
+                        moda: 'Ojek / Taksi Online (Grab / Gojek)',
+                        koridor: 'Rute Langsung (Point-to-Point)',
+                        tarif: 'Motor Rp18rb–20rb · Mobil Rp25rb–35rb',
+                        waktu: '15–20 Menit Langsung'
+                    }),
+                    getSteps: (origin, dest) => [
+                        { bullet: 'origin-bullet', title: `Penjemputan di Titik ${origin}`, desc: `Pesan Ojol Motor atau Mobil langsung dari titik lokasi ${origin} tanpa perlu berjalan jauh ke halte.` },
+                        { bullet: 'bus-bullet', title: `Perjalanan Langsung ke ${dest}`, desc: `Pengemudi mengambil rute tercepat menuju ${dest} (± 15 menit motor, ± 20 menit mobil).` },
+                        { bullet: 'dest-bullet', title: `Drop-off Area ${dest}`, desc: `Pengemudi menurunkan Anda langsung di area drop-off resmi ${dest} tanpa perlu jalan kaki tambahan.` }
+                    ]
+                }
+            };
+
+            const params = new URLSearchParams(window.location.search);
+            const paramOrigin = params.get('origin');
+            const paramDest = params.get('destination');
+
+            let currentOrigin = (paramOrigin && LOCATION_SLUGS[paramOrigin]) ? paramOrigin : 'USU';
+            let currentDest = (paramDest && LOCATION_SLUGS[paramDest] && paramDest !== currentOrigin)
+                ? paramDest
+                : (currentOrigin === 'Delipark mall' ? 'USU' : 'Delipark mall');
+            let currentMode = 'hemat';
+
+            const mapImage = document.getElementById('mapImage');
+            const mapOriginName = document.getElementById('mapOriginName');
+            const mapDestName = document.getElementById('mapDestName');
+            const mapOriginWrap = document.getElementById('mapOriginDropdownWrap');
+            const mapOriginTrigger = document.getElementById('mapOriginTriggerBtn');
+            const mapDestWrap = document.getElementById('mapDestDropdownWrap');
+            const mapDestTrigger = document.getElementById('mapDestTriggerBtn');
+            const mapSwapBtn = document.getElementById('mapSwapBtn');
+
+            const modeSelectWrap = document.getElementById('modeSelectWrap');
+            const modeSelectTrigger = document.getElementById('modeSelectTrigger');
+            const modeTriggerDisplay = document.getElementById('modeTriggerDisplay');
+            const dropupItems = document.querySelectorAll('.mode-dropup-item');
+
+            function getMapAssetPath(origin, dest, modeKey) {
+                const o = LOCATION_SLUGS[origin] || 'usu';
+                const d = LOCATION_SLUGS[dest] || 'delipark';
+                const modeSlug = MODE_SLUGS[modeKey] || 'bus';
+
+                const first = (LOCATION_ORDER[o] ?? 99) <= (LOCATION_ORDER[d] ?? 99) ? o : d;
+                const second = first === o ? d : o;
+
+                return `assets/${first}-${second}/map_${modeSlug}.png`;
+            }
+
+            function updateRouteAndMap() {
+                if (mapOriginName) mapOriginName.textContent = currentOrigin;
+                if (mapDestName) mapDestName.textContent = currentDest;
+
+                // Highlight selected items in location dropdowns
+                if (mapOriginWrap) {
+                    mapOriginWrap.querySelectorAll('.dropdown-item').forEach(item => {
+                        item.classList.toggle('active-loc', item.getAttribute('data-value') === currentOrigin);
+                    });
+                }
+                if (mapDestWrap) {
+                    mapDestWrap.querySelectorAll('.dropdown-item').forEach(item => {
+                        item.classList.toggle('active-loc', item.getAttribute('data-value') === currentDest);
+                    });
+                }
+
+                // Update Map Image Asset
+                if (mapImage) {
+                    mapImage.src = getMapAssetPath(currentOrigin, currentDest, currentMode);
+                    mapImage.alt = `Peta Rute ${MODE_LABELS[currentMode]} ${currentOrigin} ke ${currentDest}`;
+                }
+
+                document.title = `Rute ${currentOrigin} ke ${currentDest} - NYAMPE Medan`;
+                renderSheetContent(currentMode);
+            }
+
+            function closeLocationDropdowns() {
+                if (mapOriginWrap) {
+                    mapOriginWrap.classList.remove('open');
+                    if (mapOriginTrigger) mapOriginTrigger.setAttribute('aria-expanded', 'false');
+                }
+                if (mapDestWrap) {
+                    mapDestWrap.classList.remove('open');
+                    if (mapDestTrigger) mapDestTrigger.setAttribute('aria-expanded', 'false');
+                }
+            }
+
+            function closeDropup() {
+                if (modeSelectWrap) {
+                    modeSelectWrap.classList.remove('open');
+                    if (modeSelectTrigger) modeSelectTrigger.setAttribute('aria-expanded', 'false');
+                }
+            }
+
+            // Origin Dropdown Handlers
+            if (mapOriginWrap && mapOriginTrigger) {
+                mapOriginTrigger.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const wasOpen = mapOriginWrap.classList.contains('open');
+                    closeLocationDropdowns();
+                    closeDropup();
+                    if (!wasOpen) {
+                        mapOriginWrap.classList.add('open');
+                        mapOriginTrigger.setAttribute('aria-expanded', 'true');
+                    }
+                });
+
+                mapOriginWrap.querySelectorAll('.dropdown-item').forEach(item => {
+                    item.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const val = this.getAttribute('data-value');
+                        if (val) {
+                            if (val === currentDest) {
+                                currentDest = currentOrigin;
+                            }
+                            currentOrigin = val;
+                            updateRouteAndMap();
+                        }
+                        closeLocationDropdowns();
+                    });
+                });
+            }
+
+            // Destination Dropdown Handlers
+            if (mapDestWrap && mapDestTrigger) {
+                mapDestTrigger.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const wasOpen = mapDestWrap.classList.contains('open');
+                    closeLocationDropdowns();
+                    closeDropup();
+                    if (!wasOpen) {
+                        mapDestWrap.classList.add('open');
+                        mapDestTrigger.setAttribute('aria-expanded', 'true');
+                    }
+                });
+
+                mapDestWrap.querySelectorAll('.dropdown-item').forEach(item => {
+                    item.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const val = this.getAttribute('data-value');
+                        if (val) {
+                            if (val === currentOrigin) {
+                                currentOrigin = currentDest;
+                            }
+                            currentDest = val;
+                            updateRouteAndMap();
+                        }
+                        closeLocationDropdowns();
+                    });
+                });
+            }
+
+            // Swap Route (Origin <-> Destination)
+            if (mapSwapBtn) {
+                mapSwapBtn.addEventListener('click', function() {
+                    closeLocationDropdowns();
+                    const temp = currentOrigin;
+                    currentOrigin = currentDest;
+                    currentDest = temp;
+                    updateRouteAndMap();
+                });
+            }
+
+            // Render Detail Sheet Content for Current Mode & Route
+            function renderSheetContent(modeKey) {
+                const data = MODES[modeKey];
+                const sheetTitle = document.getElementById('sheetTitle');
+                const sheetContent = document.getElementById('sheetDynamicContent');
+                if (!data || !sheetContent) return;
+
+                if (sheetTitle) {
+                    sheetTitle.textContent = `Rute ${MODE_LABELS[modeKey]}: ${currentOrigin} → ${currentDest}`;
+                }
+
+                const summary = data.getSummary(currentOrigin, currentDest);
+                const steps = data.getSteps(currentOrigin, currentDest);
+                const stepsHtml = steps.map(step => `
+                    <div class="sheet-step-row">
+                        <div class="sheet-step-bullet ${step.bullet}" aria-hidden="true"></div>
+                        <div class="sheet-step-text">
+                            <h4>${step.title}</h4>
+                            <p>${step.desc}</p>
+                        </div>
+                    </div>
+                `).join('');
+
+                sheetContent.innerHTML = `
+                    <div class="sheet-summary-box">
+                        <div class="summary-item">
+                            <span class="summary-label">Moda Transportasi</span>
+                            <span class="summary-val">${summary.moda}</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Rute / Trayek</span>
+                            <span class="summary-val">${summary.koridor}</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Tarif Perjalanan</span>
+                            <span class="summary-val">${summary.tarif}</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Estimasi Waktu</span>
+                            <span class="summary-val">${summary.waktu}</span>
+                        </div>
+                    </div>
+                    <div class="sheet-steps-list">${stepsHtml}</div>
+                    <button type="button" class="btn-sheet-done" id="sheetDoneBtn">
+                        <span>Kembali ke Peta</span>
+                    </button>
+                `;
+
+                const doneBtn = document.getElementById('sheetDoneBtn');
+                if (doneBtn) doneBtn.addEventListener('click', closeSheet);
+            }
+
+            // Switch Active Transport Mode
+            function selectMode(modeKey) {
+                if (!MODES[modeKey]) return;
+                currentMode = modeKey;
+                const data = MODES[modeKey];
+
+                // Update Trigger Bar UI
+                if (modeTriggerDisplay) {
+                    modeTriggerDisplay.innerHTML = data.triggerHtml;
+                }
+
+                // Update Active Panel
+                document.querySelectorAll('.mode-panel').forEach(p => p.classList.remove('active'));
+                const targetPanel = document.getElementById('panel-' + modeKey);
+                if (targetPanel) targetPanel.classList.add('active');
+
+                // Update Active Checkmark in Drop-Up Menu
+                dropupItems.forEach(item => {
+                    item.classList.toggle('active', item.getAttribute('data-mode') === modeKey);
+                });
+
+                updateRouteAndMap();
+            }
+
+            // Drop-Up Toggle Logic
+            if (modeSelectWrap && modeSelectTrigger) {
+                modeSelectTrigger.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    closeLocationDropdowns();
+                    const isOpen = modeSelectWrap.classList.toggle('open');
+                    modeSelectTrigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                });
+
+                dropupItems.forEach(function(item) {
+                    item.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const chosenMode = this.getAttribute('data-mode');
+                        selectMode(chosenMode);
+                        closeDropup();
+                    });
+                });
+            }
+
+            // Detail Sheet Modal Handling
+            const btnDetail = document.getElementById('btnDetailRoute');
+            const detailSheet = document.getElementById('routeDetailSheet');
+            const sheetBackdrop = document.getElementById('sheetBackdrop');
+            const sheetCloseBtn = document.getElementById('sheetCloseBtn');
+
+            function openSheet() {
+                renderSheetContent(currentMode);
+                if (detailSheet) {
+                    detailSheet.classList.add('active');
+                    detailSheet.setAttribute('aria-hidden', 'false');
+                }
+            }
+
+            function closeSheet() {
+                if (detailSheet) {
+                    detailSheet.classList.remove('active');
+                    detailSheet.setAttribute('aria-hidden', 'true');
+                }
+            }
+
+            if (btnDetail) btnDetail.addEventListener('click', openSheet);
+            if (sheetBackdrop) sheetBackdrop.addEventListener('click', closeSheet);
+            if (sheetCloseBtn) sheetCloseBtn.addEventListener('click', closeSheet);
+
+            // Global Outside Click & Escape Key
+            document.addEventListener('click', function(e) {
+                if (modeSelectWrap && !modeSelectWrap.contains(e.target)) {
+                    closeDropup();
+                }
+                if ((mapOriginWrap && !mapOriginWrap.contains(e.target)) &&
+                    (mapDestWrap && !mapDestWrap.contains(e.target))) {
+                    closeLocationDropdowns();
+                }
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeDropup();
+                    closeLocationDropdowns();
+                    if (detailSheet && detailSheet.classList.contains('active')) {
+                        closeSheet();
+                    }
+                }
+            });
+
+            // Initialize default content & map
+            updateRouteAndMap();
+        });
+    </script>
+</body>
+</html>
